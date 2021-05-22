@@ -21,17 +21,20 @@ const getPartition = function (nums, left, right) {
   return i - 1;
 };
 
-const quickSort = function (nums, left, right) {
-  if(left < right) {
-    const partitionIndex = getPartition(nums, left, right);
+const quickSelect = function (nums, left, right, indexToFind) {
+  const partitionIndex = getPartition(nums, left, right);
 
-    quickSort(nums, left, partitionIndex - 1);
-    quickSort(nums, partitionIndex + 1, right);
+  if (partitionIndex === indexToFind) {
+    return nums[partitionIndex];
+  } else if (indexToFind < partitionIndex) {
+    return quickSelect(nums, left, partitionIndex - 1, indexToFind);
+  } else {
+    return quickSelect(nums, partitionIndex + 1, right, indexToFind);
   }
 };
 
 var findKthLargest = function (nums, k) {
   const indexToFind = nums.length - k;
-  quickSort(nums, 0, nums.length - 1);
-  return nums[indexToFind]
+
+  return quickSelect(nums, 0, nums.length - 1, indexToFind);
 };
