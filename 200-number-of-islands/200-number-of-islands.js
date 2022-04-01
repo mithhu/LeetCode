@@ -30,7 +30,6 @@ var numIslands = function(grid) {
           const [cR, cC] = q.dequeue();
           for (let d = 0; d < directions.length; d++) {
             let currentD = directions[d];
-            console.log(currentD)
             let nextR = cR + currentD[0];
             let nextC = cC + currentD[1];
             
