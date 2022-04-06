@@ -37,7 +37,7 @@ var minWindow = function(s, t) {
       const leftCh = s[start];
       start++;
       if (leftCh in charFreq) {
-        if (charFreq[leftCh] === 0) {
+        if (charFreq[leftCh] >= 0) {
           matched -= 1;
         }
         charFreq[leftCh]++;
