@@ -17,7 +17,6 @@ var canFinish = function(numCourses, prerequisites) {
   
   function dfs(course) {
     if (visited.has(course)) return false;
-    // if (preMap[course] === []) return true;
     
     visited.add(course);
     for (let pre of preMap[course]) {
