@@ -21,7 +21,7 @@ var cloneGraph = function(node) {
     
     let copy = new Node(node.val);
     oldToNew.set(node, copy);
-    for (let nei of [...node.neighbors]) {
+    for (let nei of node.neighbors) {
       copy.neighbors.push(clone(nei));
     }
     return copy;  
