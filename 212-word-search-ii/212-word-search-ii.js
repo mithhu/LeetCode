@@ -28,7 +28,7 @@ var findWords = function(board, words) {
   for (let word of words) {
     root.addWord(word);
   }
-  let res = new Set();
+  let res = [];
     
   let ROWS = board.length;
   let COLS = board[0].length;
@@ -39,10 +39,9 @@ var findWords = function(board, words) {
     }
     node = node.children[board[r][c]];
     word += board[r][c];
-    // console.log(word)
     if (node.isWord) {
-      res.add(word);
-      // node.isWord = true;
+      res.push(word);
+      node.isWord = false;
     }
     let temp = board[r][c];
     board[r][c] = null;
@@ -58,7 +57,7 @@ var findWords = function(board, words) {
       dfs(r, c, root, "");
     }
   }
-  return [...res]
+  return res;
     
   
     
