@@ -24,7 +24,7 @@ var countComponents = function(n, edges) {
 function find(n, par) {
   let res = n;
   while (res !== par[res]) {
-    // par[res] = par[par[res]];
+    par[res] = par[par[res]];
     res = par[res];
   }
   return res;
