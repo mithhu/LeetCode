@@ -8,7 +8,7 @@ var wordBreak = function(s, wordDict) {
   dp[s.length] = true;
   
   for (let i = s.length - 1; i >= 0; i--) {
-    for (let word of wordDict) {
+    for (let word of new Set(wordDict)) {
       if (i + word.length <= s.length && word === s.slice(i, i + word.length)) {
         dp[i] = dp[i + word.length];
       } 
