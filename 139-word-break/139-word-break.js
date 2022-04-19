@@ -6,10 +6,9 @@
 var wordBreak = function(s, wordDict) {
   const dp = Array(s.length + 1).fill(false);
   dp[s.length] = true;
-  let words = new Set(wordDict);
   
   for (let i = s.length - 1; i >= 0; i--) {
-    for (let word of words) {
+    for (let word of wordDict) {
       if (i + word.length <= s.length && word === s.slice(i, i + word.length)) {
         dp[i] = dp[i + word.length];
       } 
