@@ -25,7 +25,7 @@ var exist = function(board, word) {
   
   for (let r = 0; r < ROWS; r++) {
     for (let c = 0; c < COLS; c++) {
-      if (dfs(r, c, 0)) {
+      if (word[0] === board[r][c] && dfs(r, c, 0)) {
         return true;
       }
     }
