@@ -21,7 +21,6 @@ var change = function(amount, coins) {
       }
     }
   }
-  console.log(dp)
   return dp[rows - 1][cols - 1]
   
     
