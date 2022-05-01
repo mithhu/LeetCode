@@ -7,7 +7,6 @@ var canPartition = function(nums) {
   if (numsVal % 2) return false;
   let target = numsVal / 2;
   
-  console.log(target)
   
   let cols = target + 1;
   let rows = nums.length + 1;
