@@ -11,9 +11,9 @@
  * @return {Node}
  */
 var cloneGraph = function(node) {
-  let oldToNew = new Map();
+  const oldToNew = new Map();
   
-  function clone(node) {
+  function cloneDfs(node) {
     if (node === null) return null;
     if (oldToNew.has(node)) {
       return oldToNew.get(node);
@@ -22,11 +22,11 @@ var cloneGraph = function(node) {
     let copy = new Node(node.val);
     oldToNew.set(node, copy);
     for (let nei of node.neighbors) {
-      copy.neighbors.push(clone(nei));
+      copy.neighbors.push(cloneDfs(nei));
     }
-    return copy;  
+    return copy;
   }
   
-  return clone(node);
+  return cloneDfs(node);
     
 };
