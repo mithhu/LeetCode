@@ -4,42 +4,41 @@
  * @return {number[]}
  */
 var findOrder = function(numCourses, prerequisites) {
-  let inDegree = Array(numCourses).fill(0);
-  let graph = Array(numCourses).fill().map(() => []);
+  let preMap = {};
+  for (let i = 0; i < numCourses; i++) {
+    preMap[i] = [];
+  }
   
-  prerequisites.forEach((edge) => {
-    let [child, parent] = edge;
-    graph[parent].push(child);
-    inDegree[child]++;
-  })
+  for (let course of prerequisites) {
+    preMap[course[0]].push(course[1]);
+  }
   
-  let sources = [];
+  
+  let visit = new Set();
+  let cycle = new Set();
   let res = [];
   
+  function dfs(course) {
+    if (cycle.has(course)) return false;
+    if (visit.has(course)) return true;
+    cycle.add(course);
+    
+    for (let pre of preMap[course]) {
+      if(!dfs(pre)) {
+        return false;
+      }
+    }
+    cycle.delete(course);
+    visit.add(course);
+    res.push(course);
+    return true;
+  }
   
-  for (let i = 0; i < inDegree.length; i++) {
-    if (inDegree[i] === 0) {
-      sources.push(i);
+  for (let i = 0; i < numCourses; i++) {
+    if (!dfs(i)) {
+      return [];
     }
   }
-  
-  while (sources.length) {
-    let vertex = sources.pop();
-    res.push(vertex);
-    graph[vertex].forEach((edge) => {
-      inDegree[edge]--;
-      if (inDegree[edge] === 0) {
-        sources.push(edge)
-      }
-    })
-  }
-  
-  if (res.length === numCourses) {
-    return res;
-  }
-  
-  return [];
-  
-  
+  return res;
     
 };
