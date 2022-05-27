@@ -14,8 +14,6 @@ var findItinerary = function(tickets) {
     adj[u].push(v);
   }
   
-  // console.log(adj);
-  
   function dfs(cur) {
     if (res.length === tickets.length + 1) {
       return true;
