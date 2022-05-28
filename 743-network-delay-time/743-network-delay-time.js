@@ -25,7 +25,7 @@ var networkDelayTime = function(times, n, k) {
       continue;
     }
     visited.add(n1);
-    res = Math.max(w1, res);
+    res = w1;
     
     for (let [n2, w2] of edges[n1]) {
       if (!(visited.has(n2))) {
