@@ -1,20 +1,13 @@
-/**
- * @param {number[]} nums
- * @return {number}
- */
-
 var maxProduct = function(nums) {
   let res = -Infinity;
-  let curMin = 1;
   let curMax = 1;
+  let curMin = 1;
   
-  for (let n of nums) {
-    let temp = curMax * n;
-    curMax = Math.max(n, curMax * n, curMin * n);
-    curMin = Math.min(n, temp, curMin * n);
+  for (let num of nums) {
+    let tempMax = curMax * num;
+    curMax = Math.max(num, curMax * num, curMin * num);
+    curMin = Math.min(num, tempMax, curMin * num);
     res = Math.max(res, curMax);
-    console.log(curMax, curMin, res)
   }
-  
   return res;
 }
