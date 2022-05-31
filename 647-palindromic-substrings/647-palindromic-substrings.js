@@ -3,27 +3,27 @@
  * @return {number}
  */
 var countSubstrings = function(s) {
-  let res = 0;
+  let count = 0;
   for (let i = 0; i < s.length; i++) {
     //odd
-    res += countPalindrome(i, i, s);
+    count += countPalindromes(i, i, s);
     //even
-    res += countPalindrome(i, i + 1, s);
-    
+    count += countPalindromes(i, i + 1, s);
   }
-  
-  return res
-    
+  return count; 
 };
 
 
-function countPalindrome(l, r, s) {
+
+function countPalindromes(l, r, s) {
   let res = 0;
+  
   while (l >= 0 && r < s.length && s[l] === s[r]) {
     res++;
     l--;
     r++;
   }
-  
   return res;
 }
+
+
