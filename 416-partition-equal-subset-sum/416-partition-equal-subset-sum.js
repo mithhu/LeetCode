@@ -3,30 +3,27 @@
  * @return {boolean}
  */
 var canPartition = function(nums) {
-  const numsVal = nums.reduce((sum, curr) => curr + sum, 0)
-  if (numsVal % 2) return false;
-  let target = numsVal / 2;
+  const sum = nums.reduce((sum, curr) => curr + sum, 0);
   
+  if (sum % 2) return false;
   
-  let cols = target + 1;
-  let rows = nums.length + 1;
+  let target = sum / 2;
+  console.log(target)
   
-  let dp = Array(rows).fill().map(() => Array(cols).fill(false));
+  let dp = new Set();
+  dp.add(0);
   
-  for (let r = 0; r < rows; r++) {
-    dp[r][0] = true;
-  }
-  
-  for (let r = 1; r < rows; r++) {
-    for (let c = 1; c < cols; c++) {
-      if (nums[r - 1] <= c) {
-        dp[r][c] = dp[r - 1][c] || dp[r - 1][c - nums[r - 1]]
-      } else {
-        dp[r][c] = dp[r - 1][c] ;
+  for (let num of nums) { 
+    let tempSet = new Set([...dp]);
+    for (let val of dp) { 
+      if (val + num === target) {
+        return true;
+      } else if (val + num < target) {
+        tempSet.add(val + num);        
       }
-    }
+    }    
+    dp = tempSet; 
   }
   
-  return dp[dp.length - 1][dp[0].length - 1]
-  
+  return dp.has(target); 
 };
