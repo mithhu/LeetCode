@@ -8,18 +8,14 @@ var eraseOverlapIntervals = function(intervals) {
   let res = 0;
   let prevEnd = intervals[0][1];
   
-  for (let i = 1; i < intervals.length; i++) {
-    let start = intervals[i][0];
-    let end = intervals[i][1];
-    
+  for (let [start, end] of intervals.slice(1)) {
     if (start >= prevEnd) {
       prevEnd = end;
     } else {
-      prevEnd = Math.min(prevEnd, end);
       res++;
+      prevEnd = Math.min(prevEnd, end)
     }
-    
   }
-    
   return res;
+    
 };
