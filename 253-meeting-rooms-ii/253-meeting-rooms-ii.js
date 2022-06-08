@@ -3,13 +3,13 @@
  * @return {number}
  */
 var minMeetingRooms = function(intervals) {
-  let start = intervals.map((inter) => inter[0]).sort((a, b) => a - b);
-  let end = intervals.map((inter) => inter[1]).sort((a, b) => a - b);
+  let start = intervals.map((i) => i[0]).sort((a, b) => a - b);
+  let end = intervals.map((i) => i[1]).sort((a, b) => a - b);
   
+  let count = 0;
+  let res = 0;
   let s = 0;
   let e = 0;
-  let res = 0;
-  let count = 0;
   
   while (s < start.length) {
     if (start[s] < end[e]) {
@@ -21,8 +21,5 @@ var minMeetingRooms = function(intervals) {
       e++;
     }
   }
-  
   return res;
-  
-    
 };
