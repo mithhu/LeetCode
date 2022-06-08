@@ -4,26 +4,20 @@
  * @return {number[][]}
  */
 var insert = function(intervals, newInterval) {
-  const merged = [];
-  let i = 0;
+  let res = [];
   
-  while (i < intervals.length && newInterval[0] > intervals[i][1]) {
-    merged.push(intervals[i]);
-    i++;
+  for (let i = 0; i < intervals.length; i++) {
+    let interval = intervals[i];
+    if (newInterval[1] < interval[0]) {
+      res.push(newInterval, ...intervals.slice(i));
+      return res;
+    } else if (newInterval[0] > interval[1]) {
+      res.push(interval);
+    } else {
+      newInterval = [Math.min(newInterval[0], interval[0]), Math.max(newInterval[1], interval[1])];
+    }
   }
-  
-  while (i < intervals.length && newInterval[1] >= intervals[i][0]) {
-    newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
-    newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
-    i++;
-  }
-  
-  merged.push(newInterval);
-  
-  while (i < intervals.length) {
-    merged.push(intervals[i]);
-    i++;
-  }
-  return merged;
+  res.push(newInterval);
+  return res;
     
 };
