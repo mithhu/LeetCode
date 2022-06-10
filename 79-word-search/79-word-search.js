@@ -4,35 +4,33 @@
  * @return {boolean}
  */
 var exist = function(board, word) {
-  let ROWS = board.length;
-  let COLS = board[0].length;
   
-  function dfs(r, c, i) {
-    if (i === word.length) {
+  function wordTraverseDfs(i, j, idx) {
+    if (idx === word.length) {
       return true;
     }
     
-    if (r < 0 || c < 0 || r >= ROWS || c >= COLS || board[r][c] !== word[i]) {
+    if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || word[idx] !== board[i][j]) {
       return false;
     }
-    let temp = board[r][c];
-    board[r][c] = "*";
-    let res = dfs(r + 1, c, i + 1) || dfs(r - 1, c, i + 1) || dfs(r, c + 1, i + 1) || 
-        dfs(r, c - 1, i + 1);
-    board[r][c] = temp;
+    
+    let temp = board[i][j];
+    board[i][j] = "#";
+    
+    let res = wordTraverseDfs(i + 1, j, idx + 1) || wordTraverseDfs(i - 1, j, idx + 1) || wordTraverseDfs(i, j + 1, idx + 1) || wordTraverseDfs(i, j - 1, idx + 1);
+    board[i][j] = temp;
     return res;
   }
   
-  for (let r = 0; r < ROWS; r++) {
-    for (let c = 0; c < COLS; c++) {
-      if (word[0] === board[r][c] && dfs(r, c, 0)) {
+  
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[0].length; j++) {
+      if (board[i][j] === word[0] && wordTraverseDfs(i, j, 0)) {
         return true;
       }
     }
   }
+  
   return false;
-  
-  
-  
     
 };
