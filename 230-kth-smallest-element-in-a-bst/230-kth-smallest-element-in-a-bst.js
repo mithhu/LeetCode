@@ -14,6 +14,7 @@
 var kthSmallest = function(root, k) {
   let stack = [];
   let curr = root;
+  let n = 0;
   
   while (curr || stack.length) {
     while (curr) {
@@ -22,9 +23,10 @@ var kthSmallest = function(root, k) {
     }
     curr = stack.pop();
     k -= 1;
-    if (k === 0) return curr.val;
-    curr = curr.right
+    if (k === 0) {
+      return curr.val;
+    }
+    curr = curr.right;
   }
-  
     
 };
