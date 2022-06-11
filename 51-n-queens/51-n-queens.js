@@ -13,7 +13,6 @@ var solveNQueens = function(n) {
   
   function backTrack(r) {
     if (r === n) {
-      console.log(board)
       let copy = board.map((el) => el.join(""))
       res.push(copy);
       return;
