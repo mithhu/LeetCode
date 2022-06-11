@@ -10,20 +10,20 @@
  * @param {TreeNode} root
  * @return {TreeNode}
  */
-
-
-function invertTree(root) {
-  // Write your code here.
-	if (root === null) return null;
-	
-	swapTree(root);
-	invertTree(root.left);
-	invertTree(root.right);
+var invertTree = function(root) {
+  if (root === null) return null;
+  
+  swapTree(root);
+  
+  invertTree(root.left);
+  invertTree(root.right);
+    
   return root;
-}
+};
 
-function swapTree(node) {
-	const temp = node.left;
-	node.left = node.right;
-	node.right = temp;
+
+function swapTree(root) {
+  let temp = root.left;
+  root.left = root.right;
+  root.right = temp;
 }
