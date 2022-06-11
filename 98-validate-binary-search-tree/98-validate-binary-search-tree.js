@@ -11,15 +11,16 @@
  * @return {boolean}
  */
 var isValidBST = function(root) {
-  return validateBstHelper(root, -Infinity, Infinity);
-
-};
-
-function validateBstHelper(node, minVal, maxVal) {
-  if (node === null) return true;
   
-  if (node.val <= minVal || node.val >= maxVal) return false;
-  
-  return validateBstHelper(node.left, minVal, node.val) && validateBstHelper(node.right, node.val, maxVal)
+  function dfs(node, left, right) {
+    if (node === null) return true;
+    if (node.val <= left || node.val >= right) {
+      return false;
+    }
     
-}
+    return dfs(node.left, left, node.val) && dfs(node.right, node.val, right);
+  }
+  
+  return dfs(root, -Infinity, Infinity);
+    
+};
