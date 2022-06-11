@@ -1,17 +1,10 @@
-
-
-
-/** 
- * @param {string} word
- * @return {void}
- */
-
 class TrieNode {
   constructor() {
-    this.children = {};
+    this.childrens = {}; //{a: {p : {p: {}, e: {}}}}
     this.endOfW = false;
   }
 }
+
 
 class Trie {
   constructor() {
@@ -20,33 +13,36 @@ class Trie {
 
   insert(word) {
     let curr = this.root;
+    
     for (let ch of word) {
-      if (!(ch in  curr.children)) {
-        curr.children[ch] = new TrieNode();
+      if (!(ch in curr)) {
+        curr[ch] = new TrieNode();
       }
-      curr = curr.children[ch];
+      curr = curr[ch];
     }
-    curr.endOfW = true; 
+    curr.endOfW = true;
   }
-  
+
   search(word) {
     let curr = this.root;
+    
     for (let ch of word) {
-      if (!(ch in  curr.children)) {
+      if (!(ch in curr)) {
         return false;
       }
-      curr = curr.children[ch];
+      curr = curr[ch];
     }
-    return curr.endOfW;   
+    return curr.endOfW;
   }
-  
+
   startsWith(prefix) {
     let curr = this.root;
+    
     for (let ch of prefix) {
-      if (!(ch in  curr.children)) {
+      if (!(ch in curr)) {
         return false;
       }
-      curr = curr.children[ch];
+      curr = curr[ch];
     }
     return true;
   }
@@ -55,6 +51,15 @@ class Trie {
 
 
 
+/** 
+ * @param {string} word
+ * @return {boolean}
+ */
+
+/** 
+ * @param {string} prefix
+ * @return {boolean}
+ */
 
 
 /** 
