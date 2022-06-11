@@ -15,10 +15,10 @@ class Trie {
     let curr = this.root;
     
     for (let ch of word) {
-      if (!(ch in curr)) {
-        curr[ch] = new TrieNode();
+      if (!(ch in curr.childrens)) {
+        curr.childrens[ch] = new TrieNode();
       }
-      curr = curr[ch];
+      curr = curr.childrens[ch];
     }
     curr.endOfW = true;
   }
@@ -27,10 +27,10 @@ class Trie {
     let curr = this.root;
     
     for (let ch of word) {
-      if (!(ch in curr)) {
+      if (!(ch in curr.childrens)) {
         return false;
       }
-      curr = curr[ch];
+      curr = curr.childrens[ch];
     }
     return curr.endOfW;
   }
@@ -39,10 +39,10 @@ class Trie {
     let curr = this.root;
     
     for (let ch of prefix) {
-      if (!(ch in curr)) {
+      if (!(ch in curr.childrens)) {
         return false;
       }
-      curr = curr[ch];
+      curr = curr.childrens[ch];
     }
     return true;
   }
