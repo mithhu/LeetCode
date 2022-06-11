@@ -12,18 +12,30 @@
  * @return {boolean}
  */
 var isSubtree = function(root, subRoot) {
-  if (!subRoot) return true;
-  if(!root) return false;
-  
-  if (sameTree(root, subRoot)) return true;
-  return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot)  
+  if (!subRoot) {
+    return true;
+  }
+
+  if (!root) {
+    return false;
+  }
+
+  if (isSameTree(root, subRoot)) {
+    return true;
+  }
+
+  return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
 };
 
+function isSameTree(p, q) {
+ if (!p && !q) {
+   return true;
+ }
 
-function sameTree(root, subRoot) {
-  if (!root && !subRoot) return true;
-  if (!root || !subRoot || root.val !== subRoot.val) return false;
-  
-  return sameTree(root.left, subRoot.left) && sameTree(root.right, subRoot.right)
-
+ if (!p || !q || p.val !== q.val) {
+   return false;
+ }
+ 
+ return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
 }
+
