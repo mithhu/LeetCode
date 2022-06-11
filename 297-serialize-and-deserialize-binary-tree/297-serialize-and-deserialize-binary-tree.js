@@ -1,43 +1,60 @@
-function serialize(root) {
-  // your code here
-  const arr = [];
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+
+/**
+ * Encodes a tree to a single string.
+ *
+ * @param {TreeNode} root
+ * @return {string}
+ */
+var serialize = function(root) {
+  let res = [];
   function generateTree(node) {
-    if (!node) {
-      arr.push("n");
+    if (node === null) {
+      res.push("N");
       return;
     }
-    arr.push(node.val);
+    res.push(node.val);
     generateTree(node.left);
     generateTree(node.right);
   }
   
   generateTree(root);
-  return arr.join(",");
-
-}
+  return res.join(",");
+    
+};
 
 /**
- * @param {string} str
- * @return {Node}
+ * Decodes your encoded data to tree.
+ *
+ * @param {string} data
+ * @return {TreeNode}
  */
-function deserialize(str) {
-  let vals = str.split(",");
+var deserialize = function(data) {
+  let arr = data.split(","); //[]
   let i = 0;
-  
   function dfs() {
-    let current = vals[i];
-    if (current === "n") {
+    if (arr[i] === "N") {
       i++;
       return null;
     }
-    let currentNode = new TreeNode(current);
+    let curNode = new TreeNode(arr[i]);
     i++;
-    currentNode.left = dfs();
-    currentNode.right = dfs();
-    return currentNode;
+    curNode.left = dfs();
+    curNode.right = dfs();
+    return curNode;
   }
   
-  return dfs()
-  
-  
-}
+  return dfs();
+    
+};
+
+/**
+ * Your functions will be called as such:
+ * deserialize(serialize(root));
+ */
