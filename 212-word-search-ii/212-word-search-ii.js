@@ -24,7 +24,6 @@ class TrieNode {
 
 var findWords = function(board, words) {
   let root = new TrieNode();
-  let word = "";
   for (let word of words) {
     root.addWord(word);
   }
