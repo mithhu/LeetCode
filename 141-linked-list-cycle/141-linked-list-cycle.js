@@ -15,10 +15,14 @@ var hasCycle = function(head) {
   let fast = head;
   
   while (fast && fast.next) {
-    slow = slow.next;
-    fast = fast.next.next;
-    if (slow === fast) return true;
+    slow = slow.next; //1 n + 1
+    fast = fast.next.next; //2
+    
+    if (slow === fast) {
+      return true;
+    }
   }
   
   return false;
+    
 };
