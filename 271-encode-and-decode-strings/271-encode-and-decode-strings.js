@@ -6,10 +6,12 @@
  */
 var encode = function(strs) {
   let res = "";
+  
   for (let s of strs) {
-    res += `${s.length}#${s}`;
+    res += `${s.length}#${s}`
   }
   return res;
+    
 };
 
 /**
@@ -28,9 +30,8 @@ var decode = function(s) {
       j++;
     }
     let len = Number(s.slice(i, j));
-    
     res.push(s.slice(j + 1, j + 1 + len));
-    i = j + 1 + len
+    i = j + 1 + len;
   }
   
   return res;
