@@ -36,12 +36,3 @@ function isAlphaNumeric(ch) {
   return false;
   
 }
-
-// function isAlphaNumeric(num) {
-//   if (("A".charCodeAt() <= num.charCodeAt() <= "Z".charCodeAt()) ||
-//     ("a".charCodeAt() <= num.charCodeAt() <= "z".charCodeAt()) ||
-//     ("0".charCodeAt() <= num.charCodeAt() <= "9".charCodeAt())) {
-//     return true;
-//   }
-//   return false;
-// }
