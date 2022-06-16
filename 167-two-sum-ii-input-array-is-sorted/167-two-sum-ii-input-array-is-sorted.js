@@ -4,19 +4,17 @@
  * @return {number[]}
  */
 const twoSum = (arr, target) => {
-  // if (arr === null || arr.length === 0) return arr;
-
-  let start = 0;
-  let end = arr.length - 1;
-
-  while (start < end) {
-    const sum = arr[start] + arr[end];
+  let left = 0;
+  let right = arr.length - 1;
+  
+  while (left < right) {
+    let sum = arr[left] + arr[right];
     if (sum < target) {
-      start += 1;
+      left++;
     } else if (sum > target) {
-      end -= 1;
+      right--;
     } else {
-      return [start + 1, end + 1]; // return value
+      return [left + 1, right + 1];
     }
   }
 };
