@@ -20,7 +20,7 @@ var kthSmallest = function(root, k) {
     k -= 1;
     if (k === 0) {
       res = node.val;
-      return node.val;
+      return;
     }
     if (node.right) {
       dfs(node.right);
