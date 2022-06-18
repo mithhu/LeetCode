@@ -3,54 +3,47 @@
  * @return {number[][]}
  */
 var pacificAtlantic = function(heights) {
-  let ROWS = heights.length;
-  let COLS = heights[0].length;
   let atl = new Set();
   let pac = new Set();
+  let R = heights.length;
+  let C = heights[0].length;
   
   //first and last row
-  for (let c = 0; c < COLS; c++) {
+  for (let c = 0; c < C; c++) {
+    //pac
     dfs(0, c, pac, heights[0][c], heights);
-    dfs(ROWS - 1, c, atl, heights[ROWS - 1][c], heights);
+    //atl
+    dfs(R - 1, c, atl, heights[R - 1][c], heights);
   }
-
-  //first and last col
-  for (let r = 0; r < ROWS; r++) {
+  
+  //first and alst col
+  for (let r = 0; r < R; r++) {
     dfs(r, 0, pac, heights[r][0], heights);
-    dfs(r, COLS - 1, atl, heights[r][COLS - 1], heights);
+    dfs(r, C - 1, atl, heights[r][C - 1], heights); 
   }
   
+  let res = [];
   
-
-  //loop through the matrix and find common 
-  const res = [];
-  for (let r = 0; r < ROWS; r++) {
-    for (let c = 0; c < COLS; c++) {
-      if (pac.has(`${r}*${c}`) && atl.has(`${r}*${c}`)) {
-        res.push([r, c]); 
+  for (let r = 0; r < R; r++) {
+    for (let c = 0; c < C; c++) {
+      if (atl.has(`${r}*${c}`) && pac.has(`${r}*${c}`)) {
+        res.push([r, c]);
       }
     }
-  
-  }  
+  }
   
   return res;
-  
+    
 };
-  
-  //dfs
 
-function dfs(r, c, visited, prevH, heights) {
-  if (r < 0 || r >= heights.length || c < 0 || c >= heights[0].length || visited.has(`${r}*${c}`) || heights[r][c] < prevH) {
+
+function dfs(r, c, set, prevH, heights) {
+  if (r < 0 || r >= heights.length || c < 0 || c >= heights[0].length || set.has(`${r}*${c}`) || heights[r][c] < prevH) {
     return;
   }
-  visited.add(`${r}*${c}`);
-  dfs(r + 1, c, visited, heights[r][c], heights);
-  dfs(r - 1, c, visited, heights[r][c], heights);
-  dfs(r, c + 1, visited, heights[r][c], heights);
-  dfs(r, c - 1, visited, heights[r][c], heights);
+  set.add(`${r}*${c}`);
+  dfs(r + 1, c, set, heights[r][c], heights);
+  dfs(r - 1, c, set, heights[r][c], heights);
+  dfs(r, c + 1, set, heights[r][c], heights);
+  dfs(r, c - 1, set, heights[r][c], heights);
 }
-
-
-
-
-
