@@ -17,13 +17,13 @@ var checkInclusion = function(s1, s2) {
     charFreq[ch]++;
   }
   
-  let len = Object.keys(charFreq).length;
+  let len = s1.length;
   
   while (end < s2.length) {
     const rightChar = s2[end];
     if (rightChar in charFreq) {
       charFreq[rightChar] -= 1;
-      if (charFreq[rightChar] === 0) {
+      if (charFreq[rightChar] >= 0) {
         matched += 1;
       }
     }
@@ -35,7 +35,7 @@ var checkInclusion = function(s1, s2) {
       let leftChar = s2[start];
       start++;
       if (leftChar in charFreq) {
-        if (charFreq[leftChar] === 0) {
+        if (charFreq[leftChar] >= 0) {
           matched -= 1;
         }
         charFreq[leftChar]++;
