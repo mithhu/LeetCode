@@ -8,10 +8,10 @@ var encode = function(strs) {
   let res = "";
   
   for (let s of strs) {
-    res += `${s.length}#${s}`
+    let len = s.length;
+    res += `${len}#${s}`;
   }
   return res;
-    
 };
 
 /**
@@ -23,7 +23,6 @@ var encode = function(strs) {
 var decode = function(s) {
   let res = [];
   let i = 0;
-  
   while (i < s.length) {
     let j = i;
     while (s[j] !== "#") {
