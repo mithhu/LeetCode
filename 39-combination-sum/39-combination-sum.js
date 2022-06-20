@@ -4,31 +4,32 @@
  * @return {number[][]}
  */
 var combinationSum = function(candidates, target) {
+  let curr = [];
   let res = [];
-  let cur = [];
-  let total = 0;
+  let remaining = target;
   
-  function dfs(i) {
-    //base
-    if (total === target) {
-      res.push([...cur]);
-      return;
-    }
-    if (i >= candidates.length || total > target) {
+  function combinationSumHelper(i) {
+    if (remaining === 0) {
+      res.push([...curr]);
       return;
     }
     
-    //add
-    cur.push(candidates[i]);
-    total += candidates[i];
-    dfs(i);
-    //not add
-    cur.pop();
-    total -= candidates[i]
-    dfs(i + 1);
+    if ( i >= candidates.length || remaining < 0) {
+      return;
+    }
+    
+    //add current val
+    remaining -= candidates[i];
+    curr.push(candidates[i]);
+    combinationSumHelper(i);
+    
+    //skip current val
+    remaining += candidates[i];
+    curr.pop();
+    combinationSumHelper(i + 1);
   }
-  
-  dfs(0);
+  combinationSumHelper(0);
   return res;
+  
     
 };
