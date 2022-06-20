@@ -12,16 +12,15 @@
  */
 var removeNthFromEnd = function(head, n) {
   let dummy = new ListNode(0, head);
-  
   let left = dummy;
   let right = head;
   
   while (right && n > 0) {
     right = right.next;
-    n -= 1;
+    n--;
   }
   
-  while(right) {
+  while (right) {
     right = right.next;
     left = left.next;
   }
@@ -29,6 +28,4 @@ var removeNthFromEnd = function(head, n) {
   left.next = left.next.next;
   
   return dummy.next;
-  
-    
 };
