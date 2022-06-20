@@ -21,14 +21,12 @@ var search = function(nums, target) {
         r = mid - 1;
       }
     } else {
-    //right sorted
-      if (target > nums[r] || target < nums[mid]) {
+      if (target < nums[mid] || target > nums[r]) {
         r = mid - 1;
       } else {
         l = mid + 1;
       }
     }
-    
   }
   
   return -1;
