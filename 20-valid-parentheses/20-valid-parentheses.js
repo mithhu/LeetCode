@@ -3,17 +3,18 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-  const parens = {
+  let parens = {
     ")": "(",
     "}": "{",
-    "]": "["
+    "]": "[",
   }
   
   let stack = [];
   
   for (let ch of s) {
     if (ch in parens) {
-      if (stack.pop() !== parens[ch]) {
+      let opening = stack.pop();
+      if (opening !== parens[ch]) {
         return false;
       }
     } else {
