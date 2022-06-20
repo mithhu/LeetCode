@@ -25,7 +25,6 @@ var mergeTwoLists = function(list1, list2) {
     tail = tail.next;
   }
   
-  
   tail.next = list1 || list2;
   
   return head.next;
