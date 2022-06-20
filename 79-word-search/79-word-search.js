@@ -4,28 +4,25 @@
  * @return {boolean}
  */
 var exist = function(board, word) {
-  
-  function wordTraverseDfs(i, j, idx) {
+  function wordTraverse(i, j, idx) {
     if (idx === word.length) {
       return true;
     }
     
-    if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || word[idx] !== board[i][j]) {
+    if (i < 0 || j < 0 || i >= board.length || j >= board[0].length || word[idx] !== board[i][j]) {
       return false;
     }
     
     let temp = board[i][j];
     board[i][j] = "#";
-    
-    let res = wordTraverseDfs(i + 1, j, idx + 1) || wordTraverseDfs(i - 1, j, idx + 1) || wordTraverseDfs(i, j + 1, idx + 1) || wordTraverseDfs(i, j - 1, idx + 1);
+    let res = wordTraverse(i + 1, j, idx + 1) || wordTraverse(i - 1, j, idx + 1) || wordTraverse(i, j + 1, idx + 1) || wordTraverse(i, j - 1, idx + 1);
     board[i][j] = temp;
     return res;
   }
   
-  
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[0].length; j++) {
-      if (board[i][j] === word[0] && wordTraverseDfs(i, j, 0)) {
+  for (let r = 0; r < board.length; r++) {
+    for (let c = 0; c < board[0].length; c++) {
+      if (board[r][c] === word[0] && wordTraverse(r, c, 0)) {
         return true;
       }
     }
