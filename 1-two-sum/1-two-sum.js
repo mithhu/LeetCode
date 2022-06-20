@@ -7,15 +7,15 @@ var twoSum = function(nums, target) {
   let map = {};
   
   for (let i = 0; i < nums.length; i++) {
-    const desiredNum = target - nums[i];
-    
-    if (desiredNum in map) {
-      return [map[desiredNum], i];
+    let num = nums[i];
+    const required = target - num;
+    if (required in map) {
+      return [map[required], i]
     } else {
-      map[nums[i]] = i;
+      map[num] = i;
     }
   }
   
-  return false;
+  return -1;
     
 };
