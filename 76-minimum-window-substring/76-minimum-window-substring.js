@@ -6,9 +6,9 @@
 var minWindow = function(s, t) {
   let start = 0;
   let end = 0;
-  let subStart = 0;
   let minLen = Infinity;
   let charFreq = {};
+  let subStart = 0;
   let matched = 0;
   
   for (let ch of t) {
@@ -29,21 +29,20 @@ var minWindow = function(s, t) {
     
     while (matched === t.length) {
       if (minLen > end - start + 1) {
-        minLen = end- start + 1;
+        minLen = end - start + 1;
         subStart = start;
       }
-      let leftCh = s[start];
+      let chStart = s[start];
       start++;
-      if (leftCh in charFreq) {
-        if (charFreq[leftCh] >= 0) {
-          matched -= 1;
+      if (chStart in charFreq) {
+        if (charFreq[chStart] >= 0) {
+          matched--;
         }
-        charFreq[leftCh]++;
+        charFreq[chStart]++;
       }
     }
     end++;
   }
-  return minLen === Infinity ? "" : s.slice(subStart, subStart + minLen)
   
-    
+  return minLen === Infinity ? "" : s.slice(subStart, subStart + minLen)
 };
