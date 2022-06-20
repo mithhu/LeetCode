@@ -14,21 +14,23 @@ var mergeKLists = function(lists) {
     return null;
   }
   
+  
   while (lists.length > 1) {
     let mergedLists = [];
     
     for (let i = 0; i < lists.length; i += 2) {
       let l1 = lists[i];
       let l2 = i + 1 < lists.length ? lists[i + 1] : null;
-      mergedLists.push(mergeList(l1, l2))
+      mergedLists.push(merge2List(l1, l2));
     }
     lists = mergedLists;
   }
   
   return lists[0];
+    
 };
 
-function mergeList(l1, l2) {
+function merge2List(l1, l2) {
   let dummy = new ListNode();
   let tail = dummy;
   
@@ -44,5 +46,16 @@ function mergeList(l1, l2) {
   }
   
   tail.next = l1 || l2;
+  
   return dummy.next;
 }
+
+
+
+
+
+
+
+
+
+
