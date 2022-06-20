@@ -5,11 +5,11 @@ class TrieNode {
   }
 }
 
-
 class WordDictionary {
   constructor() {
     this.root = new TrieNode();
   }
+  
   addWord(word) {
     let curr = this.root;
     
@@ -25,25 +25,23 @@ class WordDictionary {
   search(word) {
     function dfs(idx, node) {
       let curr = node;
-
+      
       for (let i = idx; i < word.length; i++) {
         let ch = word[i];
         if (ch === ".") {
           for (let child of Object.values(curr.childrens)) {
-              if (dfs(i + 1, child)) {
-                return true;
-              }
+            if(dfs(i + 1, child)) {
+              return true;
+            }
           }
           return false;
         } else {
           if (!(ch in curr.childrens)) {
-            return false;
+            return false
           }
           curr = curr.childrens[ch];
         }
       }
-
-
       return curr.endW;
     }
     return dfs(0, this.root);
