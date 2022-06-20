@@ -5,11 +5,12 @@
 var canAttendMeetings = function(intervals) {
   intervals.sort((a, b) => a[0] - b[0]);
   
-  for (let i = 1; i < intervals.length; i++) {
-    let start = intervals[i][0];
+  for (let i = 1; i < intervals.length; i++ ) {
     let prevEnd = intervals[i - 1][1];
-    
-    if (prevEnd > start) return false;
+    let [s, e] = intervals[i];
+    if (s < prevEnd) {
+      return false;
+    }
   }
   
   return true;
