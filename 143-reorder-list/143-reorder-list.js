@@ -25,9 +25,9 @@ var reorderList = function(head) {
   let firstHalfHead = head;
   let secondHalfHead = reverseList(slow);
   
-  while(secondHalfHead) {
+  while (secondHalfHead) {
     let temp1 = firstHalfHead.next;
-    let temp2 = secondHalfHead.next
+    let temp2 = secondHalfHead.next;
     
     firstHalfHead.next = secondHalfHead;
     secondHalfHead.next = temp1;
@@ -37,19 +37,21 @@ var reorderList = function(head) {
   }
   
   if (firstHalfHead !== null) {
-    firstHalfHead.next = null;
+    firstHalfHead.next = null
   }
+    
 };
+
 
 function reverseList(node) {
   let prev = null;
   let curr = node;
   
   while (curr) {
-    let next = curr.next;
+    let tempNext = curr.next;
     curr.next = prev;
     prev = curr;
-    curr = next;
+    curr = tempNext;
   }
   return prev;
 }
