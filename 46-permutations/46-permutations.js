@@ -12,16 +12,15 @@ var permute = function(nums) {
   for (let i = 0; i < nums.length; i++) {
     let n = nums.shift();
     let perms = permute(nums);
-
-    if (perms.length) {
-      for (let perm of perms) {
-        perm.push(n);
-      }
+    
+    for (let perm of perms) {
+      perm.push(n);
     }
+    
     result.push(...perms);
     nums.push(n);
   }
   
   return result;
-  
+    
 };
