@@ -3,19 +3,14 @@
  * @return {number}
  */
 var majorityElement = function(nums) {
-  let count = {};
   let res = 0;
-  let maxCount = 0;
+  let count = 0;
   
   for (let num of nums) {
-    if (!(num in count)) {
-      count[num] = 0;
-    }
-    count[num]++;
-    if (count[num] > maxCount) {
+    if (count === 0) {
       res = num;
-      maxCount = count[num];
     }
+    count += num === res ? 1 : -1; 
   }
   
   return res;
