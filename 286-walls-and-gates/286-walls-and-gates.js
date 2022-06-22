@@ -13,6 +13,7 @@ var wallsAndGates = function(rooms) {
     for (let j = 0; j < COLS; j++) {
       if (rooms[i][j] === 0) {
         q.enqueue([i, j]);
+        visit.add(`${i}*${j}`);
       }
     }
   }
@@ -25,7 +26,6 @@ var wallsAndGates = function(rooms) {
     let len = q.size();
     for (let i = 0; i < len; i++) {   
       let [r, c] = q.dequeue();
-      // visit.add(`${r}*${c}`);
       rooms[r][c] = dist;
       
       for (let [dr, dc] of dir) {
@@ -37,7 +37,7 @@ var wallsAndGates = function(rooms) {
           continue;
         }
         q.enqueue([nr, nc]);
-        visit.add(`${nr}*${nc}`)
+        visit.add(`${nr}*${nc}`);
       }
     }
     dist += 1;
