@@ -4,15 +4,18 @@
  */
 var minCostClimbingStairs = function(cost) {
   let n = cost.length;
-  let dp = Array(n).fill(0);
- 
-  for (let i = 0; i < n; i++) {
-    if (i < 2) {
-      dp[i] = cost[i] 
-    } else {
-      dp[i] = cost[i] + Math.min(dp[i - 1], dp[i - 2])
-    }
+  let first = cost[0];
+  let second = cost[1];
+  
+  if (n < 2) {
+    return Math.min(first, second);
   }
-  return Math.min(dp[n - 1], dp[n - 2]);
+ 
+  for (let i = 2; i < n; i++) {
+    let curr = cost[i] + Math.min(first, second);
+    first = second;
+    second = curr;
+  }
+  return Math.min(first, second);
     
 };
