@@ -11,30 +11,30 @@
  * @return {number[]}
  */
 var rightSideView = function(root) {
+  let q = [];
   let res = [];
-  if (root === null) return res;
+  if (root === null) {
+    return res;
+  }
   
-  let q = new Queue();
-  q.enqueue(root);
   
-  while (q.size()) {
-    let len = q.size();
-
+  q.push(root);
+  
+  while (q.length) {
+    let len = q.length;
     
     for (let i = 0; i < len; i++) {
-      let curr = q.dequeue();
+      let curr = q.shift();
       if (i === len - 1) {
         res.push(curr.val);
       }
       if (curr.left) {
-        q.enqueue(curr.left)
+        q.push(curr.left);
       }
       if (curr.right) {
-        q.enqueue(curr.right)
+        q.push(curr.right);
       }
     }
   }
-  
   return res;
-    
 };
