@@ -25,14 +25,11 @@ var isBalanced = function(root) {
     }
     
     if (Math.abs(leftH - rightH) > 1) {
-      return -1
+      return -1;
     }
     
-    return 1 + Math.max(leftH, rightH)
-    
-    
+    return 1 + Math.max(leftH, rightH);
   }
-  
   return dfs(root) === -1 ? false : true;
     
 };
