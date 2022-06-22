@@ -3,44 +3,41 @@
  * @return {void} Do not return anything, modify rooms in-place instead.
  */
 var wallsAndGates = function(rooms) {
-  let ROWS = rooms.length;
-  let COLS = rooms[0].length;
+  let R = rooms.length;
+  let C = rooms[0].length;
   let visit = new Set();
-  
   let q = new Queue();
   
-  for (let i = 0; i < ROWS; i++) {
-    for (let j = 0; j < COLS; j++) {
-      if (rooms[i][j] === 0) {
-        q.enqueue([i, j]);
-        visit.add(`${i}*${j}`);
+  for (let r = 0; r < R; r++) {
+    for (let c = 0; c < C; c++) {
+      if (rooms[r][c] === 0) {
+        q.enqueue([r, c]);
+        visit.add(`${r}_${c}`);
       }
     }
   }
   
   let dist = 0;
+  let dir = [[0, 1], [1, 0], [0, -1], [-1, 0]];
   
-  let dir = [[0, 1], [0, -1], [1, 0], [-1, 0]];
-  
-  while (q.size() > 0) {
-    let len = q.size();
-    for (let i = 0; i < len; i++) {   
+  while (q.size()) {
+    let len = q.size(); 
+    for (let i = 0; i < len; i++) {
       let [r, c] = q.dequeue();
       rooms[r][c] = dist;
       
       for (let [dr, dc] of dir) {
         let nr = dr + r;
         let nc = dc + c;
-        
-        if (nr < 0 || nr >= ROWS || nc < 0 || nc >= COLS ||  visit.has(`${nr}*${nc}`) || rooms[nr][nc] === -1
-           ) {
-          continue;
-        }
+        if (!(nr < 0 || nc < 0 || nr >= R || nc >= C || visit.has(`${nr}_${nc}`) || rooms[nr][nc] === -1)) {
         q.enqueue([nr, nc]);
-        visit.add(`${nr}*${nc}`);
+        visit.add(`${nr}_${nc}`);
+        }
       }
+      
     }
-    dist += 1;
+    dist++;
   }
     
+  return rooms;
 };
