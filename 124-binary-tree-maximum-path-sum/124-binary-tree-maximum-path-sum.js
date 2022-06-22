@@ -12,21 +12,20 @@
  */
 var maxPathSum = function(root) {
   let maxSum = -Infinity;
-  function getMaxPathSum(node) {
+  
+  function dfs(node) {
     if (node === null) {
       return 0;
     }
-    let leftSum = Math.max(0, getMaxPathSum(node.left));
-    let rightSum = Math.max(0, getMaxPathSum(node.right));
-    let currSum = node.val + leftSum + rightSum;
-    
-    maxSum = Math.max(maxSum, currSum);
-    
-    return node.val + Math.max(leftSum, rightSum);
-    
+
+    let leftH = Math.max(dfs(node.left), 0);
+    let rightH = Math.max(dfs(node.right), 0);
+    maxSum = Math.max(maxSum, node.val + leftH + rightH);
+    return node.val + Math.max(leftH, rightH);  
   }
   
-  getMaxPathSum(root);
+  dfs(root);
   return maxSum;
-    
+  
+  
 };
