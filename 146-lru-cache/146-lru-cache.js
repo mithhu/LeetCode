@@ -1,6 +1,7 @@
 /**
  * @param {number} capacity
  */
+
 class Node {
   constructor(key, val) {
     this.key = key;
@@ -11,13 +12,14 @@ class Node {
 }
 
 class LRUCache {
-  constructor(capacity) {
-    this.cap = capacity;
+  // cap, left, r, cache
+  constructor(cap) {
+    this.cap = cap;
+    this.cache = new Map();
     this.left = new Node(0, 0);
     this.right = new Node(0, 0);
     this.left.next = this.right;
     this.right.prev = this.left;
-    this.cache = new Map();
   }
   
   insert(node) {
@@ -39,7 +41,7 @@ class LRUCache {
   get(key) {
     if (!(this.cache.has(key))) {
       return -1;
-    }
+    };
     this.remove(this.cache.get(key));
     this.insert(this.cache.get(key));
     return this.cache.get(key).val;
@@ -48,7 +50,7 @@ class LRUCache {
   put(key, val) {
     if (this.cache.has(key)) {
       this.remove(this.cache.get(key));
-    }
+    };
     this.cache.set(key, new Node(key, val));
     this.insert(this.cache.get(key));
     
@@ -57,24 +59,7 @@ class LRUCache {
       this.remove(lru);
       this.cache.delete(lru.key);
     }
-  };
     
-};
+  }
+}
 
-/** 
- * @param {number} key
- * @return {number}
- */
-
-/** 
- * @param {number} key 
- * @param {number} value
- * @return {void}
- */
-
-/** 
- * Your LRUCache object will be instantiated and called as such:
- * var obj = new LRUCache(capacity)
- * var param_1 = obj.get(key)
- * obj.put(key,value)
- */
