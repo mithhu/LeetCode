@@ -5,34 +5,29 @@
 var evalRPN = function(tokens) {
   let stack = [];
   
-  for (let ch of tokens) {
-    if (["+", "-", "/", "*"].includes(ch)) {
-      let right = stack.pop();
-      let left = stack.pop();
-      let val = getVal(ch, Number(left), Number(right));
+  for (let op of tokens) {
+    if (["+", "-", "*", "/"].includes(op)) {
+      let second = stack.pop();
+      let first = stack.pop();
+      let val = getVal(first, second, op);
       stack.push(val);
     } else {
-      stack.push(ch);
+      stack.push(Number(op));
     }
   }
   
   return stack[0];
-  
-    
 };
 
-function getVal(ch, left, right) {
-  switch(ch) {
+function getVal(first, second, op) {
+  switch(op) {
     case "+":
-      return left + right;
-    case "*":
-      return left * right;
+      return first + second;
     case "-":
-      return left - right;
+      return first - second;
+    case "*":
+      return first * second;
     case "/":
-      return Math.trunc(left / right);
-    default:
-      break;
+      return Math.trunc(first / second);
   }
-    
 }
