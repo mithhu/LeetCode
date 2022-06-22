@@ -9,37 +9,38 @@ var wallsAndGates = function(rooms) {
   
   let q = new Queue();
   
-  function addRoom(r, c) {
-    if (r < 0 || r >= ROWS || c < 0 || c >= COLS ||  visit.has(`${r}*${c}`) || rooms[r][c] === -1
-       ) {
-      return;
-    }
-    visit.add(`${r}*${c}`);
-    q.enqueue([r, c]);
-  }
-  
   for (let i = 0; i < ROWS; i++) {
     for (let j = 0; j < COLS; j++) {
       if (rooms[i][j] === 0) {
         q.enqueue([i, j]);
-         visit.add(`${i}*${j}`);
+      visit.add(`${i}*${j}`);
+        
       }
     }
   }
   
   let dist = 0;
   
+  let dir = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+  
   while (q.size() > 0) {
     let len = q.size();
-
     for (let i = 0; i < len; i++) {   
-      [r, c] = q.dequeue();
-
+      let [r, c] = q.dequeue();
+      // visit.add(`${r}*${c}`);
       rooms[r][c] = dist;
-      addRoom(r + 1, c);
-      addRoom(r - 1, c);
-      addRoom(r, c + 1);
-      addRoom(r, c - 1);
+      
+      for (let [dr, dc] of dir) {
+        let nr = dr + r;
+        let nc = dc + c;
+        
+        if (nr < 0 || nr >= ROWS || nc < 0 || nc >= COLS ||  visit.has(`${nr}*${nc}`) || rooms[nr][nc] === -1
+           ) {
+          continue;
+        }
+        q.enqueue([nr, nc]);
+        visit.add(`${nr}*${nc}`)
+      }
     }
     dist += 1;
   }
