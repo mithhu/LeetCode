@@ -32,7 +32,7 @@ var wallsAndGates = function(rooms) {
         let nr = dr + r;
         let nc = dc + c;
         
-        if (nr < 0 || nr >= ROWS || nc < 0 || nc >= COLS ||  visit.has(`${nr}*${nc}`) || rooms[nr][nc] === -1 || rooms[nr][nc] === 0
+        if (nr < 0 || nr >= ROWS || nc < 0 || nc >= COLS ||  visit.has(`${nr}*${nc}`) || rooms[nr][nc] === -1
            ) {
           continue;
         }
