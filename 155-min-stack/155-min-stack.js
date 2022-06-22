@@ -5,8 +5,7 @@ class MinStack {
   }
   push(val) {
     this.stack.push(val);
-    val = Math.min(val, this.minStack.length ? this.minStack.at(-1) : Infinity);
-    this.minStack.push(val);
+    this.minStack.push(Math.min(val, this.minStack.length ? this.minStack.at(-1) : Infinity));
   }
 
   pop() {
