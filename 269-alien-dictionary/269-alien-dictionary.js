@@ -27,24 +27,31 @@ var alienOrder = function(words) {
   }
 
   let res = [];
-  let visit = {};
+  let visit = new Set();
+  let cycle = new Set()
 
   function dfs(c) {
-    if (c in visit) {
-      return visit[c];
+    if (cycle.has(c)) {
+      return false;
     }
-    visit[c] = true;
+    if (visit.has(c)) {
+      return true;
+    }
+    cycle.add(c);
+
     for (let nei of adj[c]) {
-      if (dfs(nei)) {
-        return true;
+      if (!dfs(nei)) {
+        return false;
       }
     }
-    visit[c] = false;
+    cycle.delete(c);
+    visit.add(c);
     res.push(c);
+    return true;
   }
 
   for (let c in adj) {
-    if (dfs(c)) {
+    if (!dfs(c)) {
       return "";
     }
   }
