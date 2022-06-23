@@ -4,24 +4,20 @@
  * @return {number}
  */
 var change = function(amount, coins) {
-  let cols = amount + 1;
-  let rows = coins.length + 1;
-  
-  let dp = Array(rows).fill([]).map(() => Array(cols).fill(0));
-  
-  for (let r = 0; r < rows; r++) {
+  let dp = Array(coins.length + 1).fill([]).map(() => Array(amount + 1).fill(0));
+  for (let r = 0; r < coins.length + 1; r++) {
     dp[r][0] = 1;
   }
-  for (let r = 1; r < rows; r++) {
-    for (let c = 1; c < cols; c++) {
-      if (coins[r - 1] <= c) {
-        dp[r][c] = dp[r - 1][c] + dp[r][c - coins[r - 1]];
+  
+  for (let c = 1; c < coins.length + 1; c++) {
+    for (let a = 1; a < amount + 1; a++) {
+      if (coins[c - 1] <= a) {
+        dp[c][a] = dp[c - 1][a] + dp[c][a - coins[c - 1]];
       } else {
-        dp[r][c] = dp[r - 1][c];
+        dp[c][a] = dp[c - 1][a];
       }
     }
-  }
-      return dp.at(-1).at(-1)
-
+  }  
+  return dp.at(-1).at(-1);
     
 };
