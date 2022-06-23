@@ -4,20 +4,19 @@
  * @return {boolean}
  */
 var wordBreak = function(s, wordDict) {
-  let dp = Array(s.length + 1).fill(false);
-  dp[s.length] = true;
-  let words = new Set(wordDict)
+  let cache = Array(s.length + 1).fill(false);
+  cache[cache.length - 1] = true;
   
-  for (let i = s.length - 1; i >= 0; i--) {
-    for (let word of words) {
-      if (i + word.length <= s.length && word === s.slice(i, i + word.length)) {
-        dp[i] = dp[i + word.length];
+  for (let i = s.length; i >= 0; i--) {
+    for (let word of wordDict) {
+      if (i + word.length <= s.length && s.slice(i, i + word.length) === word) {
+        cache[i] = cache[i + word.length];
       }
-      if (dp[i]) {
+      if (cache[i]) {
         break;
       }
     }
-  }
-  return dp[0];
-    
+   }
+  
+  return cache[0];
 };
