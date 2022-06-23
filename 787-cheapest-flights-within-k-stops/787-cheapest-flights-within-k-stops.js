@@ -11,21 +11,19 @@ var findCheapestPrice = function(n, flights, src, dst, k) {
   prices[src] = 0;
   
   for (let i = 0; i < k + 1; i++) {
-    
-    let tempPrices = [...prices];
+    let temp = [...prices];
     
     for (let [s, d, p] of flights) {
       if (prices[s] === Infinity) {
         continue;
       }
-      
-      if (prices[s] + p < tempPrices[d]) {
-        tempPrices[d] = prices[s] + p;
-      }
+      if (prices[s] + p < temp[d]) {
+        temp[d] = prices[s] + p;
+      }  
     }
-    prices = [...tempPrices];
+    prices = [...temp]
   }
   
   return prices[dst] === Infinity ? -1 : prices[dst];
-    
 };
+
