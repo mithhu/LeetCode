@@ -23,7 +23,7 @@ var checkValidString = function(s) {
     }
     
     if (leftMin < 0) { // "" )
-      leftMin = 0;
+      leftMin++;
     }
   }
    
