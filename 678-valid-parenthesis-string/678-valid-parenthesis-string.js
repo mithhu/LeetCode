@@ -13,7 +13,7 @@ var checkValidString = function(s) {
     } else if (ch === ")") {
       leftMin--;
       leftMax--;
-    } else { // *
+    } else { //*
       leftMin--; //)
       leftMax++; //(
     }
@@ -22,10 +22,11 @@ var checkValidString = function(s) {
       return false;
     }
     
-    if (leftMin < 0) { // "" )
+    if (leftMin < 0) {
       leftMin++;
     }
   }
-   
+  
   return leftMin === 0;
+    
 };
