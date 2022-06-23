@@ -3,33 +3,38 @@
  * @return {number}
  */
 var longestIncreasingPath = function(matrix) {
-  let ROWS = matrix.length;
-  let COLS = matrix[0].length;
+  let cache = {};
+  let R = matrix.length;
+  let C = matrix[0].length;
+  let max = -Infinity;
   
-  let dp = {};
-  
-  function dfs(i, j, prevVal) {
-    if (i < 0 || i >= ROWS || j < 0 || j >= COLS || matrix[i][j] <= prevVal) {
+  function dfs(r, c, prevVal) {
+    if (r < 0 || r === R || c < 0 || c === C || matrix[r][c] <= prevVal) {
       return 0;
     }
     
-    if (`${i}*${j}` in dp) {
-      return dp[`${i}*${j}`];
+    if (`${r}_${c}` in cache) {
+      return cache[`${r}_${c}`];
     }
     
     let res = 1;
-    res = Math.max(res, 1 + dfs(i + 1, j, matrix[i][j]));
-    res = Math.max(res, 1 + dfs(i - 1, j, matrix[i][j]));
-    res = Math.max(res, 1 + dfs(i, j + 1, matrix[i][j]));
-    res = Math.max(res, 1 + dfs(i, j - 1, matrix[i][j]));
-    dp[`${i}*${j}`] = res;
+    res = Math.max(res, 1 + dfs(r + 1, c, matrix[r][c]));
+    res = Math.max(res, 1 + dfs(r - 1, c, matrix[r][c]));
+    res = Math.max(res, 1 + dfs(r, c + 1 , matrix[r][c]));
+    res = Math.max(res, 1 + dfs(r, c - 1, matrix[r][c]));
+    cache[`${r}_${c}`] = res;
+    max = Math.max(max, res);
     return res;
+  } 
+  
+        
+
+  
+  for (let i = 0; i < R; i++) {
+    for (let j = 0; j < C; j++) {
+      dfs(i, j, -1);
+    }
   }
   
-  for (let r = 0; r < ROWS; r++) {
-    for (let c = 0; c < COLS; c++) {
-      dfs(r, c, -1)
-    }
-  }  
-  return Math.max(...Object.values(dp))
+  return max;
 };
