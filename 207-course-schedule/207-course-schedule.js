@@ -5,16 +5,16 @@
  */
 var canFinish = function(numCourses, prerequisites) {
   let preMap = {};
+  
   for (let i = 0; i < numCourses; i++) {
     preMap[i] = [];
   }
-  
-  for (let course of prerequisites) {
-    preMap[course[0]].push(course[1]);
+  for (let [c, p] of prerequisites) {
+    preMap[c].push(p);
   }
   
-  let cycle = new Set();
   let visit = new Set();
+  let cycle = new Set();
   
   function dfs(course) {
     if (cycle.has(course)) {
@@ -24,15 +24,16 @@ var canFinish = function(numCourses, prerequisites) {
       return true;
     }
     cycle.add(course);
-    for (let nei of preMap[course]) {
-      if (!(dfs(nei))) {
+    
+    for (let pre of preMap[course]) {
+      if (!dfs(pre)) {
         return false;
       }
     }
     cycle.delete(course);
     visit.add(course);
-    return true;
     
+    return true;
   }
   
   
@@ -41,6 +42,7 @@ var canFinish = function(numCourses, prerequisites) {
       return false;
     }
   }
-  
-  return true;
+  return true;  
 };
+
+
