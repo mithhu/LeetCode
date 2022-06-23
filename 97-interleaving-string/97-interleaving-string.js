@@ -5,23 +5,31 @@
  * @return {boolean}
  */
 var isInterleave = function(s1, s2, s3) {
-  let m = s1.length;
-  let n = s2.length;
-  
-  if (m + n !== s3.length) return false;
-  
-  let dp = Array(m + 1).fill().map(() => Array(n + 1).fill(false));
-  dp[m][n] = true;
-
-  for (let i = m; i >= 0; i--) {
-    for (let j = n; j >= 0; j--) {
-      if (i < m && s1[i] === s3[i + j]) {
-        dp[i][j] = dp[i][j] || dp[i + 1][j]
-      }
-      if (j < n && s2[j] === s3[i + j]) {
-        dp[i][j] = dp[i][j] || dp[i][j + 1]
-      }
-    }
+  let dp = {};
+  if (s1.length + s2.length !== s3.length) {
+    return false;
   }
-  return dp[0][0];
+  function dfs(i, j) {
+    if (i === s1.length && j === s2.length) {
+      return true;
+    }
+
+    if (`${i}_${j}` in dp) {
+      return dp[`${i}_${j}`];
+    }
+    
+    if (i < s1.length && s1[i] === s3[i + j] && dfs(i + 1, j)) {
+      dp[`${i}_${j}`] = true;
+      return dp[`${i}_${j}`];
+    }
+    
+    if (j < s2.length && s2[j] === s3[i + j] && dfs(i, j + 1)) {
+      dp[`${i}_${j}`] = true;
+      return dp[`${i}_${j}`];
+    }
+    dp[`${i}_${j}`] = false;
+    return false;
+  }
+  
+  return dfs(0, 0);
 };
