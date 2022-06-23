@@ -8,9 +8,9 @@ var partitionLabels = function(s) {
     lastIdx[s[i]] = i;
   }
   
-  let res = [];
-  let size = 0;
   let end = 0;
+  let size = 0;
+  let res = [];
   
   for (let i = 0; i < s.length; i++) {
     size++;
