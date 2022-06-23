@@ -3,28 +3,26 @@
  * @param {string} t
  * @return {number}
  */
-var numDistinct = function(s, t) {
-  let cache = {};
-
-  function dfs(i, j) {
-    if (j === t.length) {
-      return 1;
-    }
-    if (i === s.length) {
-      return 0;
-    }
-    if (`${i}_${j}` in cache) {
-      return cache[`${i}_${j}`];
-    }
-
-    if (s[i] === t[j]) {
-      cache[`${i}_${j}`] = dfs(i + 1, j + 1) + dfs(i + 1, j);
-    } else {
-	    cache[`${i}_${j}`] = dfs(i + 1, j);
-    }
-    return cache[`${i}_${j}`];
+var numDistinct = function(text1, text2) {
+  let C = text1.length;
+  let R = text2.length;
+    let dp = Array(R + 1).fill([]).map(() => Array(C + 1).fill(0));
+  
+  for (let c = 0; c < C + 1; c++) {
+    dp[0][c] = 1;
   }
+  
+  for (let r = 1; r < R + 1; r++) {
+    for (let c = 1; c < C + 1; c++) {
+      if (text2[r - 1] === text1[c - 1]) {
+        dp[r][c] = dp[r - 1][c - 1] + dp[r][c - 1];
+      } else {
+        dp[r][c] = dp[r][c - 1];
+      }
+    }
+  }  
+  return dp.at(-1).at(-1);
 
-  return dfs(0, 0);
-
+    
+    
 };
