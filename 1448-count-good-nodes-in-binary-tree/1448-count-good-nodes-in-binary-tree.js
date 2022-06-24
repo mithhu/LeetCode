@@ -17,7 +17,7 @@ var goodNodes = function(root) {
       return 0;
     }
     
-    res = 1 ? node.val >= maxVal : 0;
+    res = node.val >= maxVal ? 1 : 0;
     
     maxVal = Math.max(maxVal, node.val);
     
