@@ -10,9 +10,7 @@
  * @return {void} Do not return anything, modify head in-place instead.
  */
 var reorderList = function(head) {
-  if (head === null || head.next === null) {
-    return;
-  }
+  if (head === null) return null;
   
   let slow = head;
   let fast = head;
@@ -22,36 +20,40 @@ var reorderList = function(head) {
     fast = fast.next.next;
   }
   
-  let firstHalfHead = head;
-  let secondHalfHead = reverseList(slow);
+  let firstHead = head;
+  let secondHead = reverseList(slow);
   
-  while (secondHalfHead) {
-    let temp1 = firstHalfHead.next;
-    let temp2 = secondHalfHead.next;
+  while (secondHead) {
+    let temp1 = firstHead.next;
+    let temp2 = secondHead.next;
     
-    firstHalfHead.next = secondHalfHead;
-    secondHalfHead.next = temp1;
+    firstHead.next = secondHead;
+    secondHead.next = temp1;
     
-    firstHalfHead = temp1;
-    secondHalfHead = temp2;
+    firstHead = temp1;
+    secondHead = temp2;
   }
   
-  if (firstHalfHead !== null) {
-    firstHalfHead.next = null
+  if (firstHead) {
+    firstHead.next = null;
   }
-    
+  
+  return head;
 };
 
 
 function reverseList(node) {
   let prev = null;
   let curr = node;
-  
   while (curr) {
-    let tempNext = curr.next;
+    let next = curr.next;
     curr.next = prev;
     prev = curr;
-    curr = tempNext;
+    curr = next;
   }
+  
   return prev;
+  
 }
+
+
