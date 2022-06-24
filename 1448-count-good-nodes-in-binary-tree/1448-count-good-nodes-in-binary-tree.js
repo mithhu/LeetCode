@@ -11,13 +11,12 @@
  * @return {number}
  */
 var goodNodes = function(root) {
-  let res = [];
   function dfs(node, maxVal) {
     if (node === null) {
       return 0;
     }
     
-    res = node.val >= maxVal ? 1 : 0;
+    let res = node.val >= maxVal ? 1 : 0;
     
     maxVal = Math.max(maxVal, node.val);
     
