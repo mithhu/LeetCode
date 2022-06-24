@@ -5,34 +5,32 @@
  */
 var combinationSum2 = function(candidates, target) {
   let res = [];
-  let cur = [];
+  let curr = [];
   candidates.sort((a, b) => a - b)
-
   
-  function dfs(i, total) {
-    //base
+  function backtrack(i, total) {
     if (total === target) {
-      res.push([...cur]);
+      res.push([...curr]);
       return;
     }
+    
     if (i >= candidates.length || total > target) {
       return;
     }
     
-    //add
-    cur.push(candidates[i]);
-    // total += candidates[i];
-    dfs(i + 1, total + candidates[i]);
-    //not add
-    cur.pop();
+    //add the current
+    curr.push(candidates[i]);
+    backtrack(i + 1, total + candidates[i]);
+    
+    //don't use
+    curr.pop();
     while (i + 1 < candidates.length && candidates[i] === candidates[i + 1]) {
       i++;
     }
-
-    dfs(i + 1, total);
+    backtrack(i + 1, total);
   }
   
-  dfs(0, 0);
+  backtrack(0, 0);
+
   return res;
-    
 };
