@@ -13,21 +13,22 @@ var letterCombinations = function(digits) {
     "8": "tuv",
     "9": "wxyz",
   }
+  
   let res = [];
   
-  function dfs(idx, currStr) {
+  function backtrack(i, currStr) {
     if (currStr.length === digits.length) {
       res.push(currStr);
       return;
     }
     
-    for (let char of digitsMap[digits[idx]]) {
-      dfs(idx + 1, currStr + char)
+    for (let ch of digitsMap[digits[i]]) {
+      backtrack(i + 1, currStr + ch);
     }
   }
   
   if (digits.length) {
-    dfs(0, "");
+    backtrack(0, "");
   }
   
   return res;
