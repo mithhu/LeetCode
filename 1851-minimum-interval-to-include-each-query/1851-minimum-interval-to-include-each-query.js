@@ -12,7 +12,12 @@ var minInterval = function(intervals, queries) {
   });
   let res = {};
   let i = 0;
-  let minHeap = new MinPriorityQueue({priority: (elem) => elem[0]});
+  let minHeap = new MinPriorityQueue({compare: (a, b) => {
+    if (a[0] !== b[0]) {
+      return a[0] - b[0]
+    }
+    return a[1] - b[1];
+  }});
   
   
   
@@ -23,10 +28,10 @@ var minInterval = function(intervals, queries) {
       i++;
     }
     
-    while (minHeap.size() && minHeap.front().element[1] < q) {
+    while (minHeap.size() && minHeap.front()[1] < q) {
       minHeap.dequeue();
     }
-    res[q] = minHeap.size() ? minHeap.front().element[0] : -1;
+    res[q] = minHeap.size() ? minHeap.front()[0] : -1;
   }
   
   let result = [];
