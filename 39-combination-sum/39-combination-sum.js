@@ -8,27 +8,25 @@ var combinationSum = function(candidates, target) {
   let res = [];
   let remaining = target;
   
-  function combinationSumHelper(i) {
-    if (remaining === 0) {
+  function combinationSumHelper(i, total) {
+    if (total === target) {
       res.push([...curr]);
       return;
     }
     
-    if ( i >= candidates.length || remaining < 0) {
+    if ( i >= candidates.length || total > target) {
       return;
     }
     
     //add current val
-    remaining -= candidates[i];
     curr.push(candidates[i]);
-    combinationSumHelper(i);
+    combinationSumHelper(i, total + candidates[i]);
     
     //skip current val
-    remaining += candidates[i];
     curr.pop();
-    combinationSumHelper(i + 1);
+    combinationSumHelper(i + 1, total);
   }
-  combinationSumHelper(0);
+  combinationSumHelper(0, 0);
   return res;
   
     
