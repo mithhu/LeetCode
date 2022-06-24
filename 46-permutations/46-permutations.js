@@ -2,25 +2,29 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
+
 var permute = function(nums) {
-  let result = [];
+  let res = [];
+  let subset = [];
+  let tempSet = new Set();
   
-  if (nums.length === 1) {
-    return [[...nums]];
-  }
-  
-  for (let i = 0; i < nums.length; i++) {
-    let n = nums.shift();
-    let perms = permute(nums);
-    
-    for (let perm of perms) {
-      perm.push(n);
+  function dfs(idx) {
+    if (nums.length === subset.length) {
+      res.push([...subset]);
     }
-    
-    result.push(...perms);
-    nums.push(n);
+    for (let i = 0; i < nums.length; i++) {
+      if (tempSet.has(nums[i])) {
+        continue;
+      }
+      tempSet.add(nums[i]);
+      subset.push(nums[i]);
+      dfs(i + 1);
+      tempSet.delete(nums[i]);
+      subset.pop();
+    }
   }
   
-  return result;
+  dfs(0);
+  return res;
     
 };
