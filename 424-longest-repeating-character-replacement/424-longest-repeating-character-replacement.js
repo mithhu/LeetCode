@@ -4,26 +4,36 @@
  * @return {number}
  */
 var characterReplacement = function(s, k) {
-  let count = {};
-  let maxLen = 0;
-  let maxF = 0;
-  let l = 0;
+  let start = 0;
+  let end = 0;
+  let maxCount = 0;
+  let res = 0;
+  let map = {};
   
-  for (let r = 0; r < s.length; r++) {
-    if (!(s[r] in count)) {
-      count[s[r]] = 0;
+  for (let i = 0; i < s.length; i++) {
+    let ch = s[i];
+    if (!(ch in map)) {
+      map[ch] = 0;
     }
-    count[s[r]]++;
+    map[ch]++;
+    maxCount = Math.max(map[ch], maxCount);
     
-    maxF = Math.max(maxF, count[s[r]]);
     
-    if (r - l + 1 - maxF > k) {
-      count[s[l]]--;
-      l++;
+    if (i - start + 1 - maxCount > k) {
+      map[s[start]]--;
+      start++
     }
     
-    maxLen = Math.max(r - l + 1, maxLen)
+    res = Math.max(res, i - start + 1);    
   }
   
-  return maxLen;
+  return res;
+    
 };
+
+// AABABBA
+
+// A: 3
+// B: 1
+
+// ch: 4 - maxChar <= k
