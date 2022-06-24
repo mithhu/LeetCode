@@ -8,7 +8,7 @@ var permute = function(nums) {
   let subset = [];
   let tempSet = new Set();
   
-  function dfs(idx) {
+  function dfs() {
     if (nums.length === subset.length) {
       res.push([...subset]);
     }
@@ -18,13 +18,13 @@ var permute = function(nums) {
       }
       tempSet.add(nums[i]);
       subset.push(nums[i]);
-      dfs(i + 1);
+      dfs();
       tempSet.delete(nums[i]);
       subset.pop();
     }
   }
   
-  dfs(0);
+  dfs();
   return res;
     
 };
