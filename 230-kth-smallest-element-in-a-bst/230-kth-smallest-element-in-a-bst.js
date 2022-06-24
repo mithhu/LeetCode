@@ -12,24 +12,21 @@
  * @return {number}
  */
 var kthSmallest = function(root, k) {
-  let res = 0;
+  let maxHeap = new MaxPriorityQueue();
+  
   function dfs(node) {
-    if (node.left) {
-      dfs(node.left);
-    }
-    k -= 1;
-    if (k === 0) {
-      res = node.val;
+    if (node === null) {
       return;
     }
-    if (node.right) {
-      dfs(node.right);
+    maxHeap.enqueue(node.val);
+    if (maxHeap.size() > k) {
+      maxHeap.dequeue();
     }
-
+    dfs(node.left);
+    dfs(node.right);
   }
-      
-    dfs(root);    
-    return res;
   
+  dfs(root);
+  return maxHeap.front().element;
     
 };
