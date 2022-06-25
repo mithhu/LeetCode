@@ -1,21 +1,14 @@
 var uniquePaths = function(m, n) {
-  let grid = Array(m).fill().map(()=> Array(n).fill(0));
+  let grid = Array(n).fill(1);
   
-  for (let c = 0; c < n; c++) {
-    grid[0][c] = 1; 
-  }
-  
-  for (let r = 0; r < m; r++) {
-    grid[r][0] = 1; 
-  }
-    
+
   for (let r = 1; r < m; r++) {
     for (let c = 1; c < n; c++) {
-      grid[r][c] = grid[r - 1][c] + grid[r][c - 1];
+      grid[c] += grid[c - 1];
     }
   }
  
-  return grid.at(-1).at(-1); 
+  return grid.at(-1); 
 
 
 };
