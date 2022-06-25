@@ -15,10 +15,10 @@ var maxDepth = function(root) {
     if (node === null) {
       return 0;
     }
-    let leftD = dfs(node.left);
-    let rightD = dfs(node.right);
+    let leftH = dfs(node.left);
+    let rightH = dfs(node.right);
     
-    return 1 + Math.max(leftD, rightD);
+    return 1 + Math.max(leftH, rightH);
     
   }
   
