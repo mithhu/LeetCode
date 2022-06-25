@@ -7,14 +7,15 @@ var coinChange = function(coins, amount) {
   let dp = Array(amount + 1).fill(Infinity);
   dp[0] = 0;
   
-  for (let a = 1; a < amount + 1; a++) {
+  for (let i = 1; i < dp.length; i++) {
     for (let coin of coins) {
-      if (a - coin >= 0) { 
-        dp[a] = Math.min(dp[a], 1 + dp[a - coin])
+      if (i - coin >= 0) {
+        dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
       }
     }
   }
   
-  return dp[amount] === Infinity ? -1 : dp[amount];
+  return dp.at(-1) === Infinity ? -1 : dp.at(-1);
+   
     
 };
