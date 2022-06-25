@@ -2,26 +2,27 @@ var validTree = function(n, edges) {
   if (n === null) return 0;
   
   const graph = buildGraph(n, edges);
-  const set = new Set();
+  const visit = new Set();
+  
 
   function dfs(n, prev) {
-    if (set.has(n)) {
+    if (visit.has(n)) {
       return false;
     }
-    set.add(n);
+    visit.add(n);
+    
     for (let nei of graph[n]) {
-      if (nei === prev) {
+      if (prev === nei) {
         continue;
       }
       if (!(dfs(nei, n))) {
         return false;
       }
+      
     }
     return true;
-
   }
-
-  return dfs(0, -1) && set.size === n
+  return dfs(0, -1) && visit.size === n;
 };
 
 function buildGraph(n, edges) {
