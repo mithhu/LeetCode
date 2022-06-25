@@ -3,13 +3,14 @@
  * @return {number}
  */
 var rob = function(nums) {
-  let one = 0;  
-  let two = 0;
+  let one = nums[0];
+  let two = Math.max(one, nums[1]);
   
-  for (let i = 0; i < nums.length; i++) {
+  for (let i = 2; i < nums.length; i++) {
     let temp = Math.max(nums[i] + one, two);
     one = two;
     two = temp;
   }
-  return two;    
+
+  return nums.length === 1 ? one : two;
 };
