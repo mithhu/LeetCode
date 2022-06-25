@@ -3,25 +3,25 @@
  * @return {number}
  */
 var rob = function(nums) {
-  let rob1 = robValue(nums.slice(0, nums.length - 1));
-  let rob2 = robValue(nums.slice(1));
+  if (nums.length === 1) {
+    return nums[0];
+  }
   
-  return Math.max(nums[0], rob1, rob2);
-    
+  let robBegin = robHelper(nums.slice(0, nums.length - 1));
+  let robEnd = robHelper(nums.slice(1));
+  
+  return Math.max(robBegin, robEnd);
 };
 
-function robValue(nums) {
-  let one = 0;
-  let two = 0;
-
+var robHelper = function(nums) {
+  let one = nums[0];
+  let two = Math.max(one, nums[1]);
   
-  for (let num of nums) {
-    let temp = Math.max(num + one, two);
+  for (let i = 2; i < nums.length; i++) {
+    let temp = Math.max(nums[i] + one, two);
     one = two;
     two = temp;
   }
-  return two;
-}
 
-
-// 1 2 3 4 5 6 9
+  return nums.length === 1 ? one : two;
+};
