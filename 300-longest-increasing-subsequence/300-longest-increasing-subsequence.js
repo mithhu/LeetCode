@@ -10,9 +10,11 @@ var lengthOfLIS = function(nums) {
       if (nums[i] < nums[j]) {
         lis[i] = Math.max(lis[i], 1 + lis[j]);
       }
+
+
     }
   }
-  
-  return Math.max(...lis)
+  return Math.max(...lis);
     
 };
+
