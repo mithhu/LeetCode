@@ -22,28 +22,31 @@ class WordDictionary {
     curr.endW = true;
   }
   
+  
   search(word) {
-    function dfs(idx, node) {
-      let curr = node;
+    function dfs(node, idx) {
+	    let curr = node;
       
       for (let i = idx; i < word.length; i++) {
         let ch = word[i];
         if (ch === ".") {
           for (let child of Object.values(curr.childrens)) {
-            if(dfs(i + 1, child)) {
+            if (dfs(child, i + 1)) {
               return true;
             }
           }
           return false;
         } else {
           if (!(ch in curr.childrens)) {
-            return false
+            return false;
           }
           curr = curr.childrens[ch];
         }
       }
       return curr.endW;
     }
-    return dfs(0, this.root);
+
+    return dfs(this.root, 0);
   }
+
 };
