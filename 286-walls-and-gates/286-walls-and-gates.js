@@ -12,7 +12,7 @@ var wallsAndGates = function(rooms) {
     for (let c = 0; c < C; c++) {
       if (rooms[r][c] === 0) {
         q.enqueue([r, c]);
-        visit.add(`${r}_${c}`);
+        // visit.add(`${r}_${c}`);
       }
     }
   }
@@ -24,18 +24,19 @@ var wallsAndGates = function(rooms) {
     let len = q.size(); 
     for (let i = 0; i < len; i++) {
       let [r, c] = q.dequeue();
+      visit.add(`${r}_${c}`);
       rooms[r][c] = dist;
       
       for (let [dr, dc] of dir) {
         let nr = dr + r;
         let nc = dc + c;
-        if (!(nr < 0 || nc < 0 || nr >= R || nc >= C || visit.has(`${nr}_${nc}`) || rooms[nr][nc] === -1)) {
+        if (nr < 0 || nc < 0 || nr >= R || nc >= C || visit.has(`${nr}_${nc}`) || rooms[nr][nc] === -1 || rooms[nr][nc] === 0) {
+          continue
+        }
         q.enqueue([nr, nc]);
         visit.add(`${nr}_${nc}`);
         }
       }
-      
-    }
     dist++;
   }
     
