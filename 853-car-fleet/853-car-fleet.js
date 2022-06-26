@@ -11,18 +11,18 @@ var carFleet = function(target, position, speed) {
     pair.push([position[i], speed[i]]);
   }
   let stack = [];
-  
   pair.sort((a, b) => b[0] - a[0]);
   
-  for (let [p, s] of pair) {
-    console.log(p, s)
-    
+  for (let [p, s] of pair) {    
     let time = (target - p) / s;
-    stack.push(time);
     
-    if (stack.length >= 2 && stack.at(-1) <= stack.at(-2)) {
-      stack.pop();
-    } 
+    if (stack.length === 0 || (stack.length && time > stack.at(-1))) {
+      stack.push(time);
+    }
+    
+    // if (stack.length >= 2 && stack.at(-1) <= stack.at(-2)) {
+    //   stack.pop();
+    // } 
   }
   return stack.length;
 };
