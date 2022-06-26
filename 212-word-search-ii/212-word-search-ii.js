@@ -1,14 +1,10 @@
-/**
- * @param {character[][]} board
- * @param {string[]} words
- * @return {string[]}
- */
 
 class TrieNode {
   constructor() {
     this.childrens = {};
-    this.word = false;
+    this.endw = false;
   }
+
   addWord(word) {
     let curr = this;
     for (let ch of word) {
@@ -17,45 +13,50 @@ class TrieNode {
       }
       curr = curr.childrens[ch];
     }
-    curr.word = true;
+    curr.endw = true;
   }
 }
+
+
 var findWords = function(board, words) {
   let root = new TrieNode();
   for (let word of words) {
     root.addWord(word);
   }
-  
+
+  let R = board.length;
+  let C = board[0].length;
   let res = [];
-  let ROWS = board.length;
-  let COLS = board[0].length;
-  
-  function dfs(r, c, node, word) {
-    if (r < 0 || c < 0 || r >= ROWS || c >= COLS || !board[r][c] || !(board[r][c] in node.childrens)) {
-      return;
+
+  function wordFindHelper(r, c, node, currStr) {
+    if (r < 0 || c < 0 || r === R || c === C || !board[r][c] || !(board[r][c] in node.childrens)) {
+      return false;
     }
+    currStr += board[r][c];
     node = node.childrens[board[r][c]];
-    word += board[r][c];
-    if (node.word) {
-      res.push(word);
-      node.word = false;
+    if (node.endw) {
+      res.push(currStr);
+      node.endw = false;
     }
     let temp = board[r][c];
     board[r][c] = null;
-    dfs(r + 1, c, node, word);
-    dfs(r - 1, c, node, word);
-    dfs(r, c + 1, node, word);
-    dfs(r, c - 1, node, word);
-    board[r][c] = temp;
+    wordFindHelper(r + 1, c, node, currStr);
+    wordFindHelper(r - 1, c, node, currStr);
+    wordFindHelper(r, c + 1, node, currStr);
+    wordFindHelper(r, c - 1, node, currStr);
+    board[r][c] = temp; 
   }
+
   
-  
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[0].length; j++) {
-      dfs(i, j, root, "")
+
+  for (let r = 0; r < R; r++) {
+    for (let c = 0; c < C; c++) {
+      wordFindHelper(r, c, root,  "");
     }
   }
-  
+
   return res;
-    
-};
+  
+
+
+}
