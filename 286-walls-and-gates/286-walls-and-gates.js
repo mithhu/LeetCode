@@ -12,7 +12,6 @@ var wallsAndGates = function(rooms) {
     for (let c = 0; c < C; c++) {
       if (rooms[r][c] === 0) {
         q.enqueue([r, c]);
-        // visit.add(`${r}_${c}`);
       }
     }
   }
@@ -31,7 +30,7 @@ var wallsAndGates = function(rooms) {
         let nr = dr + r;
         let nc = dc + c;
         if (nr < 0 || nc < 0 || nr >= R || nc >= C || visit.has(`${nr}_${nc}`) || rooms[nr][nc] === -1 || rooms[nr][nc] === 0) {
-          continue
+          continue;
         }
         q.enqueue([nr, nc]);
         visit.add(`${nr}_${nc}`);
