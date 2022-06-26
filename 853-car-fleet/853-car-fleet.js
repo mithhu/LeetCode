@@ -19,10 +19,6 @@ var carFleet = function(target, position, speed) {
     if (stack.length === 0 || (stack.length && time > stack.at(-1))) {
       stack.push(time);
     }
-    
-    // if (stack.length >= 2 && stack.at(-1) <= stack.at(-2)) {
-    //   stack.pop();
-    // } 
   }
   return stack.length;
 };
