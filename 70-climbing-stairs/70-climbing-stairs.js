@@ -3,10 +3,11 @@
  * @return {number}
  */
 var climbStairs = function(n) {
-  let one = 1; //0
-  let two = 1; //1
+  if (n === 1) return 1;
+  let one = 1; //1
+  let two = 2; //2
   
-  for (let i = 2; i < n + 1; i++) {
+  for (let i = 3; i < n + 1; i++) {
     let temp = two;
     two = one + two;
     one = temp;
