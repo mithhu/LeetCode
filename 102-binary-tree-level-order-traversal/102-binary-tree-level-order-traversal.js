@@ -31,7 +31,7 @@ var levelOrder = function(root) {
         q.enqueue(curr.right)
       }
     }
-    res.push(currArr);
+    res.push([...currArr]);
   }
   
   return res;
