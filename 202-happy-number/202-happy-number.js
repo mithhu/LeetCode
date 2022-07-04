@@ -3,20 +3,22 @@
  * @return {boolean}
  */
 var isHappy = function(n) {
-  let visit = new Set();
+  let slow = n;
+  let fast = n;
   
-  while (!(visit.has(n))) {
-    visit.add(n);
-    n = sumOfSquares(n);
+  while (true) {
+    slow = sumOfSquares(slow);
+    fast = sumOfSquares(sumOfSquares(fast));
     
-    if (n === 1) {
-      return true;
+    if (slow === fast) {
+      break;
     }
   }
   
-  return false;
+  return slow === 1;
     
 };
+
 
 function sumOfSquares(n) {
   let sum = 0;
