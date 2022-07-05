@@ -6,8 +6,8 @@
 var rotate = function(nums, k) {
   let step = k % nums.length;
   if (k === 0) return nums;
-  nums.reverse();
-  
+
+  swapHelper(nums, 0, nums.length - 1);
   swapHelper(nums, 0, step - 1);
   swapHelper(nums, step, nums.length - 1);
     
