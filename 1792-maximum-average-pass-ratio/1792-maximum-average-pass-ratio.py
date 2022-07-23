@@ -5,7 +5,7 @@ class Solution(object):
 
         maxHeap = []
         for a, b in classes:
-            a, b = a * 1.0, b * 1.0  # Convert int to double
+            # a, b = a * 1.0, b * 1.0  # Convert int to double
             maxHeap.append((-profit(a, b), a, b))
         heapq.heapify(maxHeap)  # Heapify maxHeap cost O(N)
 
