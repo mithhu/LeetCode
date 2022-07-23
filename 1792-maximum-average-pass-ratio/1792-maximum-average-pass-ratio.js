@@ -3,11 +3,14 @@
  * @param {number} extraStudents
  * @return {number}
  */
+
+function profit(i, classes) {
+  return ((classes[i][0] + 1) / (classes[i][1] + 1)) - 
+      (classes[i][0] / classes[i][1]);
+}
 var maxAverageRatio = function(classes, extraStudents) {
   const q = new MaxPriorityQueue({
-    priority: i => (classes[i][0] + 1) / (classes[i][1] + 1) - 
-      classes[i][0] / classes[i][1],
-  });
+    priority: i => profit(i, classes)});
   classes.forEach((_, i) => {
     q.enqueue(i);
   });
