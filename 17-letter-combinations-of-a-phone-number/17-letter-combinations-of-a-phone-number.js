@@ -2,36 +2,40 @@
  * @param {string} digits
  * @return {string[]}
  */
-var letterCombinations = function(digits) {
-  let digitsMap = {
-    "2": "abc",
-    "3": "def",
-    "4": "ghi",
-    "5": "jkl",
-    "6": "mno",
-    "7": "pqrs",
-    "8": "tuv",
-    "9": "wxyz",
-  }
-  
-  let res = [];
-  
-  function backtrack(i, currStr) {
-    if (currStr.length === digits.length) {
-      res.push(currStr);
-      return;
+const map = {
+    2: "abc",
+    3: "def",
+    4: "ghi",
+    5: "jkl",
+    6: "mno",
+    7: 'pqrs',
+    8: "tuv",
+    9: "wxyz",
+}
+
+function letterCombinationsHelper(str) {
+    if (str.length === 0) {
+        return [""];
     }
     
-    for (let ch of digitsMap[digits[i]]) {
-      backtrack(i + 1, currStr + ch);
-    }
-  }
-  
-  if (digits.length) {
-    backtrack(0, "");
-  }
-  
-  return res;
-  
+    let chs = map[str[0]];
+    let restArr = str.slice(1);
     
-};
+    let getRes = letterCombinationsHelper(restArr);
+    
+    let res = [];
+    for (let ch of chs) {
+        for (let el of [...getRes]) {
+            res.push(ch + el)
+        }
+    }
+    return res;
+}
+
+function letterCombinations(str) {
+  if (str.length === 0) {
+        return [];
+  }
+  return letterCombinationsHelper(str);
+}
+
