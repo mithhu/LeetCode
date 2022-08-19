@@ -7,19 +7,18 @@ var insert = function(intervals, newInterval) {
   let res = [];
   
   for (let i = 0; i < intervals.length; i++) {
-    let interval = intervals[i];
-    
-    if (newInterval[1] < interval[0]) {
+    //newInterval finishes early
+    if (newInterval[1] < intervals[i][0]) {
       res.push(newInterval, ...intervals.slice(i));
       return res;
-    } else if (newInterval[0] > interval[1]) {
-      res.push(interval);
+    } else if (intervals[i][1] < newInterval[0]) {
+      //main interval finishes early
+      res.push(intervals[i]);
     } else {
-      newInterval = [Math.min(interval[0], newInterval[0]), Math.max(interval[1], newInterval[1])];
+      //overlap
+      newInterval = [Math.min(intervals[i][0], newInterval[0]), Math.max(intervals[i][1],newInterval[1])];
     }
-    console.log(newInterval)
   }
   res.push(newInterval);
   return res;
-  
 };
