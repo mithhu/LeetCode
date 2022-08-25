@@ -23,21 +23,17 @@ var reorderList = function(head) {
   let firstHead = head;
   let secondHead = reverseList(slow);
   
-  while (secondHead) {
+  while (secondHead.next !== null) {
     let temp1 = firstHead.next;
-    let temp2 = secondHead.next;
-    
     firstHead.next = secondHead;
-    secondHead.next = temp1;
-    
     firstHead = temp1;
+    
+    let temp2 = secondHead.next; 
+    secondHead.next = temp1;
     secondHead = temp2;
   }
   
-  if (firstHead) {
-    firstHead.next = null;
-  }
-  
+
   return head;
 };
 
