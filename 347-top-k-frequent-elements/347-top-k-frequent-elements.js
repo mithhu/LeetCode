@@ -16,6 +16,8 @@ var topKFrequent = function(nums, k) {
   for (let key in count) {
     freq[count[key]].push(key);
   }
+  console.log(freq)
+  
   let res = [];
   for (let i = freq.length - 1; i >= 0; i--) {
     for (let num of freq[i]) {
