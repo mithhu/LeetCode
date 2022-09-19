@@ -2,23 +2,32 @@
  * @param {string[]} strs
  * @return {string[][]}
  */
-
-function groupAnagrams(strs) {
-  let res = {};
+var groupAnagrams = function(strs) {
   
-  for (let s of strs)  {
-    let count = Array(26).fill(0);
-    for (let ch of s) {
-      let idx = ch.charCodeAt() - "a".charCodeAt();
+  let map = {};
+  
+  for (let str of strs) {
+    
+    const count = Array(26).fill(0);
+    for (let s of str) {
+      let idx = s.charCodeAt() - "a".charCodeAt();
       count[idx]++;
     }
-    
-    if (!(count in res)) {
-      res[count] = [];
+          
+    if (!(count in map)) {
+      map[count] = [];
     }
-    res[count].push(s);
+    map[count].push(str);
   }
   
-  return Object.values(res);
+  let res = [];
   
-}
+  for (let key in map) {
+    res.push(map[key]);
+  }
+  
+  return res;
+    
+};
+
+
