@@ -7,7 +7,6 @@ var isAnagram = function(s, t) {
   if (s.length !== t.length) {
     return false;
   }
-  
   let map = {};
   
   for (let i = 0; i < s.length; i++) {
@@ -23,13 +22,10 @@ var isAnagram = function(s, t) {
   }
   
   for (let key in map) {
-    if(map[key] !== 0) {
+    if (map[key] !== 0) {
       return false;
     }
   }
-  
   return true;
-  
-
     
 };
