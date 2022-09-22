@@ -12,9 +12,9 @@ var longestConsecutive = function(nums) {
       let count = 0;
       while (set.has(num + count)) {
         count++;
-        if (count > max) {
+      }
+      if (count > max) {
           max = count;
-        }
       }
     }
   }
