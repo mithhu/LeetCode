@@ -16,8 +16,6 @@ var topKFrequent = function(nums, k) {
       maxFreq = count[num];  
     }
   }
-  console.log(count);
-  
   
   const freqIdx = Array(maxFreq + 1).fill().map(() => []);
   
