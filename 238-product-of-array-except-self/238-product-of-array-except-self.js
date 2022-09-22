@@ -16,8 +16,7 @@ var productExceptSelf = function(nums) {
     post[i] = postfix;
     postfix *= nums[i];
   }
-  
-  console.log(pre, post)
+
   
   const res = Array(nums.length).fill();
   
