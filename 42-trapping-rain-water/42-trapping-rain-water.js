@@ -12,11 +12,11 @@ var trap = function(height) {
   while (l <= r) {
     if (leftMax < rightMax) {
       leftMax = Math.max(leftMax, height[l]);
-      res += leftMax - height[l] > 0 ? leftMax - height[l] : 0;
+      res += leftMax - height[l];
       l++;
     } else {
       rightMax = Math.max(rightMax, height[r]);
-      res += rightMax - height[r] > 0 ? rightMax - height[r] : 0;
+      res += rightMax - height[r];
       r--;
     }
   }
