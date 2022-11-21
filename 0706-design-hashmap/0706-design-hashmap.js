@@ -9,35 +9,42 @@ class ListNode {
 class MyHashMap {
   constructor() {
     this.size = 769;
-    this.data = new Array(this.size + 1);
+    this.map = new Array(this.size + 1);
   }
+
   hash(key) {
     return key % this.size;
   }
-  put(key, val) {
+
+  put(key, value) {
     this.remove(key);
-    let h = this.hash(key);
-    let node = new ListNode(key, val, this.data[h]);
-    this.data[h] = node;
+    let idx = this.hash(key);
+    let node = new ListNode(key, value, this.map[idx]);
+    this.map[idx] = node;
   }
+
   get(key) {
-    let h = this.hash(key),
-      node = this.data[h];
+    let idx = this.hash(key);
+    let node = this.map[idx];
     while (node) {
-      if (node.key === key) return node.val;
+      if (node.key === key) {
+        return node.val;
+      }
       node = node.next;
     }
-
     return -1;
   }
+
   remove(key) {
-    let h = this.hash(key),
-      node = this.data[h];
+    let idx = this.hash(key);
+    let node = this.map[idx];
     if (!node) return;
     if (node.key === key) {
-      this.data[h] = node.next;
+      //1st
+      this.map[idx] = node.next;
       return;
     }
+
     while (node.next) {
       if (node.next.key === key) {
         node.next = node.next.next;
