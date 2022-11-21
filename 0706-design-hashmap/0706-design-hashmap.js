@@ -9,7 +9,7 @@ class ListNode {
 class MyHashMap {
   constructor() {
     this.size = 769;
-    this.data = new Array(this.size);
+    this.data = new Array(this.size + 1);
   }
   hash(key) {
     return key % this.size;
