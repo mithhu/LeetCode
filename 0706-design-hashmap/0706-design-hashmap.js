@@ -33,10 +33,15 @@ class MyHashMap {
         let h = this.hash(key), node = this.data[h]
         if (!node) return
         if (node.key === key) this.data[h] = node.next
-        else for (; node.next; node = node.next)
-            if (node.next.key === key) {
-                node.next = node.next.next
-                return
+        else{
+            while (node.next) {
+                if (node.next.key === key) {
+                    node.next = node.next.next
+                    return
+                }
+                node = node.next;
             }
+        }
+
     }
 };
