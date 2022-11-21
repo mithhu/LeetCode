@@ -22,8 +22,11 @@ class MyHashMap {
     }
     get(key) {
         let h = this.hash(key), node = this.data[h]
-        for (; node; node = node.next)
+        while (node) {
             if (node.key === key) return node.val
+            node = node.next;
+        }
+            
         return -1
     }
     remove(key) {
