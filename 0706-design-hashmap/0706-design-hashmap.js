@@ -7,12 +7,11 @@ class ListNode {
 }
 class MyHashMap {
     constructor() {
-        this.size = 19997
-        this.mult = 12582917
+        this.size = 769
         this.data = new Array(this.size)
     }
     hash(key) {
-        return key * this.mult % this.size
+        return key % this.size
     }
     put(key, val) {
         this.remove(key)
@@ -29,19 +28,19 @@ class MyHashMap {
             
         return -1
     }
-    remove(key) {
-        let h = this.hash(key), node = this.data[h]
-        if (!node) return
-        if (node.key === key) this.data[h] = node.next
-        else{
-            while (node.next) {
-                if (node.next.key === key) {
-                    node.next = node.next.next
-                    return
-                }
-                node = node.next;
-            }
+      remove(key) {
+    let h = this.hash(key),
+      node = this.data[h];
+    if (!node) return;
+    if (node.key === key) this.data[h] = node.next;
+    else {
+      while (node.next) {
+        if (node.next.key === key) {
+          node.next = node.next.next;
+          return;
         }
-
+        node = node.next;
+      }
     }
+  }
 };
