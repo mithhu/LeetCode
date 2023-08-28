@@ -1,15 +1,14 @@
 class Solution:
     def largestPathValue(self, colors: str, edges: List[List[int]]) -> int:
-        
         adj = defaultdict(list)
         for src, dst in edges:
             adj[src].append(dst)
         
-        
-        visit, cycle = set(), set()
-        n = len(colors)
         res = 0
+        n = len(colors)
         count = [[0] * 26 for _ in range(n)]
+        visit = set()
+        cycle = set()
         
         def dfs(node):
             if node in cycle:
@@ -19,6 +18,7 @@ class Solution:
             
             visit.add(node)
             cycle.add(node)
+            
             idx = ord(colors[node]) - ord("a")
             count[node][idx] = 1
             
@@ -29,9 +29,9 @@ class Solution:
                     count[node][c] = max(count[node][c], (1 if c == idx else 0) + count[nei][c])
             cycle.remove(node)
             return max(count[node])
-            
-        for i in range(n):
-            res = max(res, dfs(i))
+        
+        
+        for n in range(n):
+            res = max(res, dfs(n))
         
         return -1 if res == float("inf") else res
-        
