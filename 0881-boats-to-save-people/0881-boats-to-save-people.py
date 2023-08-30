@@ -11,9 +11,6 @@ class Solution:
             r -= 1
             res += 1
             
-            # if r > l:
-            #     break
-            
             if l <= r and remain >= people[l]:
                 l += 1
         return res
