@@ -17,8 +17,7 @@ class Solution:
 
         directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]
         while fresh > 0 and q:
-            length = len(q)
-            for i in range(length):
+            for i in range(len(q)):
                 r, c = q.popleft()
 
                 for dr, dc in directions:
