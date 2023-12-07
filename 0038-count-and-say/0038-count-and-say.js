@@ -6,7 +6,7 @@ var countAndSay = function(n) {
     let res = "1";
     
     while (n > 1) {
-        res = transferToChar(res); //11121312
+        res = transferToChar(res);
         n -= 1;
     }
     
@@ -14,20 +14,21 @@ var countAndSay = function(n) {
 };
 
 
-function transferToChar(chs) { //1112
+function transferToChar(chs) {
+    let resultArr = [];
     let selectedChar = chs[0];
-    let count = 0; //3
-    let res = "";
-    
+    let count = 0;
+
     for (let ch of chs) {
         if (ch === selectedChar) {
-            count += 1
+            count += 1;
         } else {
-            res += `${count}${selectedChar}` //13
+            resultArr.push(count.toString(), selectedChar);
             selectedChar = ch;
             count = 1;
         }
     }
-    res += `${count}${selectedChar}` //1312
-    return res;
+
+    resultArr.push(count.toString(), selectedChar);
+    return resultArr.join('');
 }
