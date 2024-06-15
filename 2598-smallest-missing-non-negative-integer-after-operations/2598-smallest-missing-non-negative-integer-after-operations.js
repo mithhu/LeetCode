@@ -29,12 +29,15 @@ var findSmallestInteger = function(nums, value) {
     });
 
     // Iterate and check for the smallest missing non-negative integer
-    for (let i = 0; ; i++) {
+    let i = 0;
+    while(true) {
         let rem = i % value;
         if (remFreq[rem] === 0) {
             return i;
         }
         remFreq[rem] -= 1;
+        i++;
     }
 };
+
 
