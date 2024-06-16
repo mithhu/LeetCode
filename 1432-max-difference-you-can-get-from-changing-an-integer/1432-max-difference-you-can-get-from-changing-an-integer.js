@@ -13,7 +13,7 @@ var maxDiff = function(num) {
             break;
         }
     }
-    const maxNum = parseInt(maxNumStr, 10);
+    const maxNum = parseInt(maxNumStr);
 
     // Step to find the minimum possible number (b)
     let minNumStr;
@@ -28,7 +28,7 @@ var maxDiff = function(num) {
             }
         }
     }
-    const minNum = parseInt(minNumStr, 10);
+    const minNum = parseInt(minNumStr);
 
     // Calculate and return the difference
     return maxNum - minNum;
