@@ -5,7 +5,7 @@
 var minOperations = function(logs) {
     let depth = 0;
     
-    for (log of logs) {
+    for (const log of logs) {
         if (log === "./") {
             continue;
         } else if (log === "../") {
@@ -19,5 +19,4 @@ var minOperations = function(logs) {
     }
     
     return depth
-    
 };
