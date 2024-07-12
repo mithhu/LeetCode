@@ -13,22 +13,18 @@
  * @return {Node}
  */
 var lowestCommonAncestor = function(p, q) {
-    let pCopy = p;
-    let qCopy = q;
+    const seen = new Set();
     
-    while (pCopy !== qCopy) {
-        if (pCopy) {
-            pCopy = pCopy.parent;
-        } else {
-            pCopy = q;
-        }
-        if (qCopy) {
-            qCopy = qCopy.parent; 
-        } else {
-            qCopy = p;
-        }
+    while (p) {
+        seen.add(p);
+        p = p.parent;
     }
     
-    return pCopy;
+    while (q) {
+        if (seen.has(q)) {
+            return q;
+        }
+        q = q.parent
+    }
     
 };
