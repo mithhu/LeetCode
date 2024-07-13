@@ -22,35 +22,29 @@ class Solution {
     constructor(w) {
         this.prefixSum = [];
         let prefixSum = 0;
-        
-        for (let weight of w) {
+        for (const weight of w) {
             prefixSum += weight;
             this.prefixSum.push(prefixSum);
         }
-        this.totalSum = prefixSum;
+        this.maxSum = prefixSum;
     }
-
+    
     pickIndex() {
-        const target = this.totalSum * Math.random();
-        return this.binarySearchHelper(this.prefixSum, target, 0, this.prefixSum.length - 1);
-    }
-
-    binarySearchHelper(array, target, left, right) {
-        while (left <= right) {
-            const middle = Math.floor((left + right) / 2);
-            const potentialMatch = array[middle];
-            if (target === potentialMatch) {
-                return middle;
-            } else if (target < potentialMatch) {
-                right = middle - 1;
+        const target = Math.random() * this.maxSum;
+        let l = 0;
+        let r = this.prefixSum.length - 1;
+        
+        while (l <= r) {
+            let mid = Math.floor((l + r) / 2);
+            if (this.prefixSum[mid] === target) {
+                return mid;
+            } else if (this.prefixSum[mid] < target) {
+                l = mid + 1;
             } else {
-                left = middle + 1;
+                r = mid - 1;
             }
         }
-        return left;
+        return l;
     }
 }
 
-// Example usage:
-// const solution = new Solution([1, 3, 4, 6]);
-// console.log(solution.pickIndex());
