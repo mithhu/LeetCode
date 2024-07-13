@@ -2,20 +2,24 @@
  * @param {number[]} heights
  * @return {number[]}
  */
-var findBuildings = function(heights) {
-    if (heights.length === 0) {
-        return []
+
+
+function findBuildings(heights) {
+    if (!heights.length) {
+      return [];
     }
-    let maxH = -1;
-    const res = [];
-    
+
+    let maxHeight = -1;
+    let res = [];
+
     for (let i = heights.length - 1; i >= 0; i--) {
-        if (heights[i] > maxH) {
-            maxH = heights[i];
-            res.push(i);
-        }
+      let curHeight = heights[i];
+
+      if (curHeight > maxHeight) {
+        res.unshift(i);
+        maxHeight = curHeight;
+      }
     }
-    
-    return res.reverse();
-    
-};
+
+    return res;
+  }
