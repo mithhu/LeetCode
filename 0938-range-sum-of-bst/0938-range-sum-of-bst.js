@@ -13,29 +13,27 @@
  * @return {number}
  */
 var rangeSumBST = function(root, low, high) {
-    if (!root) {
-        return 0;
-    }
+    let rangeSum = 0;
     
-    let sum = 0;
-    
-    let stack = [root];
-    
-    while (stack.length > 0) {
-        let node = stack.pop();
-        if (node) {
-            if (node.val >= low && node.val <= high) {
-                sum += node.val;
-            } 
-            if (node.val > low) {
-                stack.push(node.left);
-            } 
-            if (node.val < high) {
-                stack.push(node.right);
-            }
+    function dfs(node) {
+        if (!node) {
+            return 0;
         }
+       // check valid val
+       if (node.val >= low && node.val <= high) {
+           rangeSum += node.val;
+       }
+
+       //left
+       if (node.val > low) {
+           dfs(node.left);
+       }           
+       //right
+       if (node.val < high) {
+           dfs(node.right);
+        } 
     }
     
-    return sum;
-    
+    dfs(root);
+    return rangeSum;
 };
