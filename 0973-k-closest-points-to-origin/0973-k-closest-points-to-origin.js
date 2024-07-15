@@ -23,6 +23,5 @@ var kClosest = function(points, k) {
         res.push([r, c])
     }
     
-    console.log(res);
     return res;
 };
