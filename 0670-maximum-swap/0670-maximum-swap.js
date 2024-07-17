@@ -37,7 +37,7 @@ var maximumSwap = function(num) {
     }
     
     let res = 0;
-    for (let [num, _, __] of numAsArr) {
+    for (let [num] of numAsArr) {
         res = (res * 10) + num; 
     }
     return res;
