@@ -1,6 +1,3 @@
-/**
- * @param {number} capacity
- */
 class Node {
     constructor(key, val) {
         this.key = key;
@@ -12,8 +9,8 @@ class Node {
 
 class LRUCache {
     constructor(capacity) {
-        this.cache = new Map();
         this.capacity = capacity;
+        this.cache = new Map();
         this.left = new Node(0, 0);
         this.right = new Node(0, 0);
         this.left.next = this.right;
@@ -25,6 +22,7 @@ class LRUCache {
         let next = node.next;
         prev.next = next;
         next.prev = prev;
+        
     }
     
     insert(node) {
@@ -32,32 +30,30 @@ class LRUCache {
         let next = this.right;
         prev.next = node;
         next.prev = node;
-        node.next = next;
         node.prev = prev;
+        node.next = next;
     }
     
     get(key) {
         if (!(this.cache.has(key))) {
             return -1;
         }
-        this.remove(this.cache.get(key));
-        //remove from linked list
-        //insert on right side
-        this.insert(this.cache.get(key));
-        //get from cache
-        return this.cache.get(key).val;
+        //remove that node
+        const node = this.cache.get(key);
+        this.remove(node);
+        //insert it
+        this.insert(node);
+        
+        //return val
+        return node.val;
     }
     
-    
-    
-    put(key, val) {
-        //remove
+    put(key, value) {
         if (this.cache.has(key)) {
             this.remove(this.cache.get(key));
         }
-        this.cache.set(key, new Node(key, val));
+        this.cache.set(key, new Node(key, value));
         this.insert(this.cache.get(key));
-        
         if (this.cache.size > this.capacity) {
             let lru = this.left.next;
             this.remove(lru);
