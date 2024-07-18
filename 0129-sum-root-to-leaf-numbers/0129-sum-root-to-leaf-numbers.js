@@ -20,7 +20,10 @@ var sumNumbers = function(root) {
         if (node.left === null && node.right === null) {
             return sum;
         }
-        return dfs(node.left, sum) + dfs(node.right, sum)
+        let left =  node.left ? dfs(node.left, sum) : 0;
+        let right = node.right ? dfs(node.right, sum) : 0;
+        return left + right;
+        
         
     } 
     
