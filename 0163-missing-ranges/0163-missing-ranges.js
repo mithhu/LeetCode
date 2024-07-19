@@ -10,7 +10,7 @@ var findMissingRanges = function(nums, lower, upper) {
         res.push([lower, upper]);
         return res;
     }
-    if (nums[0] !== lower) {
+    if (nums[0] > lower) {
         res.push([lower, nums[0] - 1]);
     }
     
@@ -22,7 +22,7 @@ var findMissingRanges = function(nums, lower, upper) {
     
     
     
-    if (nums[nums.length - 1] !== upper) {
+    if (nums[nums.length - 1] < upper) {
         res.push([nums[nums.length - 1] + 1, upper]);
     }
     
