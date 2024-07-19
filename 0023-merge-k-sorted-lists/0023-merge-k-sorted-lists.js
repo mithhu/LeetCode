@@ -23,7 +23,6 @@ var mergeKLists = function(lists) {
                 continue;
             }
             let l2 = lists[i + 1];
-            // let l2 = i + 1 < lists.length ? lists[i + 1] : null;
             mergedList.push(mergeLists(l1, l2))
         }
         lists = [...mergedList];
